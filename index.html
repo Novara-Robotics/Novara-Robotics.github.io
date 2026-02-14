@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novara</title>
+    <link rel="icon" type="image/png" href="novara.png">
+    <link rel="shortcut icon" type="image/png" href="novara.png">
+    <link rel="apple-touch-icon" href="novara.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="novara.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="novara.png">
     <style>
         * {
             margin: 0;
@@ -29,27 +34,54 @@
             overflow: hidden;
         }
 
-        .animated-bg {
+        .robots-backdrop {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background-image: url('robots.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             z-index: 0;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Dark overlay for text readability */
+        .backdrop-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.7) 0%, 
+                rgba(0, 0, 0, 0.4) 30%, 
+                rgba(0, 0, 0, 0.6) 70%, 
+                rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .robots-backdrop {
+                background-attachment: scroll;
+                background-position: center top;
+            }
+        }
+
+        /* Tablet optimization */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .robots-backdrop {
+                background-position: center center;
+            }
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             text-align: center;
             padding: 2rem;
             max-width: 900px;
@@ -62,6 +94,7 @@
             line-height: 1.2;
             opacity: 0;
             animation: fadeInUp 1s ease forwards;
+            color: #000000;
         }
 
         .hero .subtitle {
@@ -236,7 +269,8 @@
 <body>
     <!-- Hero Section -->
     <section class="hero">
-        <div class="animated-bg"></div>
+        <div class="robots-backdrop"></div>
+        <div class="backdrop-overlay"></div>
         <div class="hero-content">
             <h1>AI-Powered Robot Fleet Management</h1>
             <p class="subtitle">Orchestrate your autonomous mobile robots with intelligent, scalable solutions.</p>
