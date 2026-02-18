@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novara Robotics</title>
-    <link rel="icon" type="image/png" href="novaran.png">
-    <link rel="shortcut icon" type="image/png" href="novaran.png">
-    <link rel="apple-touch-icon" href="novaran.png">
+    <link rel="icon" type="image/png" href="nnovara.png">
+    <link rel="shortcut icon" type="image/png" href="nnovara.png">
+    <link rel="apple-touch-icon" href="nnovara.png">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #08080c;
-            --bg-elevated: #101018;
-            --bg-card: rgba(255,255,255,0.03);
-            --border: rgba(255,255,255,0.08);
-            --text: #e8e8ed;
-            --text-secondary: #8a8a9a;
+            --bg: #ecf6ff;
+            --bg-elevated: #ffffff;
+            --border: rgba(0,0,0,0.07);
+            --text: #111827;
+            --text-secondary: #5b6478;
             --accent: #3b82f6;
-            --accent-glow: rgba(59,130,246,0.15);
+            --accent-glow: rgba(59,130,246,0.1);
             --accent-secondary: #818cf8;
             --gradient: linear-gradient(135deg, #3b82f6, #818cf8);
             --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Oxygen, Ubuntu, sans-serif;
@@ -48,7 +47,7 @@
         }
 
         nav.scrolled {
-            background: rgba(8,8,12,0.85);
+            background: rgba(236,246,255,0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 1px 0 var(--border);
@@ -63,23 +62,15 @@
             justify-content: space-between;
         }
 
-        .nav-logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-logo span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .nav-logo img {
+            height: 56px;
+            display: block;
         }
 
         .nav-cta {
             padding: 0.55rem 1.4rem;
-            background: var(--gradient);
-            color: #fff;
+            background: var(--text);
+            color: var(--bg);
             border-radius: 8px;
             font-size: 0.9rem;
             font-weight: 600;
@@ -87,7 +78,7 @@
         }
 
         .nav-cta:hover {
-            opacity: 0.9;
+            opacity: 0.85;
             transform: translateY(-1px);
         }
 
@@ -128,7 +119,7 @@
             right: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(129,140,248,0.06) 0%, transparent 70%);
             border-radius: 50%;
             animation: heroPulse 10s ease-in-out 2s infinite;
         }
@@ -150,6 +141,7 @@
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.03em;
+            color: var(--text);
             margin-bottom: 1.5rem;
             opacity: 0;
             animation: fadeUp 0.8s ease 0.15s forwards;
@@ -162,26 +154,15 @@
             background-clip: text;
         }
 
-        .hero-slogan {
-            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-            line-height: 1.6;
-            color: var(--text);
-            max-width: 600px;
-            margin: 0 auto 1rem;
-            font-weight: 500;
-            opacity: 0;
-            animation: fadeUp 0.8s ease 0.3s forwards;
-        }
-
         .hero-sub {
-            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            font-size: clamp(0.95rem, 1.8vw, 1.15rem);
             line-height: 1.7;
             color: var(--text-secondary);
             max-width: 560px;
             margin: 0 auto;
             font-weight: 400;
             opacity: 0;
-            animation: fadeUp 0.8s ease 0.45s forwards;
+            animation: fadeUp 0.8s ease 0.35s forwards;
         }
 
         @keyframes fadeUp {
@@ -246,15 +227,15 @@
         }
 
         .step-visual {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
+            background: #0f1117;
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 16px;
             padding: 2rem;
             min-height: 240px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: box-shadow 0.3s;
             position: relative;
             overflow: hidden;
         }
@@ -272,8 +253,7 @@
         }
 
         .step-visual:hover {
-            border-color: rgba(59,130,246,0.2);
-            box-shadow: 0 4px 40px var(--accent-glow);
+            box-shadow: 0 8px 40px rgba(59,130,246,0.12);
         }
 
         .step-visual:hover::before { opacity: 1; }
@@ -283,11 +263,11 @@
             font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
             font-size: 0.84rem;
             line-height: 2;
-            color: var(--text-secondary);
+            color: #9ca3af;
         }
 
         .terminal-line .cmd { color: var(--accent); }
-        .terminal-line .out { color: #555; }
+        .terminal-line .out { color: #6b7280; }
         .terminal-line .ok { color: #22c55e; }
 
         /* Flow visual */
@@ -299,7 +279,7 @@
         }
 
         .flow-arrow {
-            color: #333;
+            color: #4b5563;
             font-family: monospace;
             font-size: 0.9rem;
             padding-left: 2rem;
@@ -315,10 +295,11 @@
         .flow-label {
             font-size: 0.85rem;
             font-weight: 500;
+            color: #d1d5db;
         }
 
         .flow-label span {
-            color: var(--text-secondary);
+            color: #9ca3af;
             font-weight: 400;
         }
 
@@ -339,16 +320,9 @@
             gap: 1rem;
         }
 
-        .footer-logo {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .footer-logo span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .footer-logo img {
+            height: 40px;
+            display: block;
         }
 
         footer p {
@@ -384,6 +358,8 @@
             .steps-section { padding: 5rem 1.5rem; }
 
             .hero { padding: 7rem 1.5rem 4rem; }
+
+            .nav-logo img { height: 40px; }
         }
     </style>
 </head>
@@ -392,7 +368,7 @@
 <!-- Navigation -->
 <nav>
     <div class="nav-inner">
-        <div class="nav-logo"><span>Novara</span> Robotics</div>
+        <a href="/" class="nav-logo"><img src="novara_robotics_logo.PNG" alt="Novara Robotics"></a>
         <a href="https://calendly.com/saayujd/30min" target="_blank" rel="noopener" class="nav-cta">Get in Touch</a>
     </div>
 </nav>
@@ -472,7 +448,7 @@
 <!-- Footer -->
 <footer>
     <div class="footer-inner">
-        <div class="footer-logo"><span>Novara</span> Robotics</div>
+        <a href="/" class="footer-logo"><img src="novara_robotics_logo.PNG" alt="Novara Robotics"></a>
         <p>&copy; 2026 Novara Robotics</p>
     </div>
 </footer>
