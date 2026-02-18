@@ -3,378 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novara</title>
+    <title>Novara Robotics</title>
     <link rel="icon" type="image/png" href="novara.png">
     <link rel="shortcut icon" type="image/png" href="novara.png">
     <link rel="apple-touch-icon" href="novara.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="novara.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="novara.png">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08080c;
+            --bg-elevated: #101018;
+            --bg-card: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.08);
+            --text: #e8e8ed;
+            --text-secondary: #8a8a9a;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59,130,246,0.15);
+            --accent-secondary: #818cf8;
+            --gradient: linear-gradient(135deg, #3b82f6, #818cf8);
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Oxygen, Ubuntu, sans-serif;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Hero Section with Animation */
+        a { color: inherit; text-decoration: none; }
+
+        /* ───── Navigation ───── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.25rem 2rem;
+            transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(8,8,12,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 var(--border);
+            padding: 0.85rem 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-cta {
+            padding: 0.55rem 1.4rem;
+            background: var(--gradient);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* ───── Hero ───── */
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             position: relative;
+            padding: 8rem 2rem 6rem;
             overflow: hidden;
         }
 
-        .robots-backdrop {
+        .hero-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('robots.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            inset: 0;
             z-index: 0;
         }
 
-        /* Dark overlay for text readability */
-        .backdrop-overlay {
+        .hero-bg::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.7) 0%, 
-                rgba(0, 0, 0, 0.4) 30%, 
-                rgba(0, 0, 0, 0.6) 70%, 
-                rgba(0, 0, 0, 0.8) 100%);
-            z-index: 1;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: heroPulse 8s ease-in-out infinite;
         }
 
-        /* Mobile optimization */
-        @media (max-width: 768px) {
-            .robots-backdrop {
-                background-attachment: scroll;
-                background-position: center top;
-            }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: heroPulse 10s ease-in-out 2s infinite;
         }
 
-        /* Tablet optimization */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .robots-backdrop {
-                background-position: center center;
-            }
+        @keyframes heroPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            max-width: 800px;
             text-align: center;
-            padding: 2rem;
-            max-width: 900px;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
             font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
             opacity: 0;
-            animation: fadeInUp 1s ease forwards;
-            color: #000000;
+            animation: fadeUp 0.8s ease 0.15s forwards;
         }
 
-        .hero .subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 3rem;
+        .hero h1 .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-slogan {
+            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto 1rem;
+            font-weight: 500;
             opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
+            animation: fadeUp 0.8s ease 0.3s forwards;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-sub {
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.45s forwards;
         }
 
-        .cta-button {
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ───── Steps Section ───── */
+        .steps-section {
+            padding: 7rem 2rem;
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .steps-heading {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 5rem;
+        }
+
+        .step-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .step-row:last-child { margin-bottom: 0; }
+
+        .step-row.reverse .step-text { order: 2; }
+        .step-row.reverse .step-visual { order: 1; }
+
+        .step-label {
             display: inline-block;
-            padding: 1rem 3rem;
-            background: #ffffff;
-            color: #0a0a0a;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .step-text h3 {
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .step-text p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .step-visual {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
             opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
+            transition: opacity 0.3s;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        .step-visual:hover {
+            border-color: rgba(59,130,246,0.2);
+            box-shadow: 0 4px 40px var(--accent-glow);
         }
 
-        /* Section Styling */
-        .section {
-            min-height: 100vh;
+        .step-visual:hover::before { opacity: 1; }
+
+        /* Terminal lines */
+        .terminal-line {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.84rem;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+
+        .terminal-line .cmd { color: var(--accent); }
+        .terminal-line .out { color: #555; }
+        .terminal-line .ok { color: #22c55e; }
+
+        /* Flow visual */
+        .flow-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-            position: relative;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
         }
 
-        .section-content {
-            max-width: 1200px;
-            width: 100%;
+        .flow-arrow {
+            color: #333;
+            font-family: monospace;
+            font-size: 0.9rem;
+            padding-left: 2rem;
+        }
+
+        .flow-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .flow-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .flow-label span {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* ───── Footer ───── */
+        footer {
+            padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .footer-logo span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ───── Reveal ───── */
+        .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
+            transform: translateY(32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
-        .section-content.visible {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .section h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .section p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: center;
-            color: #b0b0b0;
-            margin-bottom: 1rem;
-        }
-
-        /* Steps Section */
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .step {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .step:hover {
-            transform: translateY(-10px);
-        }
-
-        .step-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #4a9eff;
-            margin-bottom: 1rem;
-        }
-
-        .step h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .step p {
-            font-size: 1rem;
-            color: #b0b0b0;
-        }
-
-        /* Features Section */
-        .features {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-item {
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(74, 158, 255, 0.5);
-        }
-
-        .feature-item h4 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #4a9eff;
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 2rem;
-            text-align: center;
-            background: #0a0a0a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        footer p {
-            color: #666;
-        }
-
-        /* Responsive */
+        /* ───── Responsive ───── */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .step-row {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 4rem;
             }
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-            .section h2 {
-                font-size: 2rem;
-            }
+
+            .step-row.reverse .step-text { order: 1; }
+            .step-row.reverse .step-visual { order: 2; }
+
+            .steps-heading { margin-bottom: 3.5rem; }
+
+            .steps-section { padding: 5rem 1.5rem; }
+
+            .hero { padding: 7rem 1.5rem 4rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="robots-backdrop"></div>
-        <div class="backdrop-overlay"></div>
-        <div class="hero-content">
-            <h1>AI-Powered Robot Fleet Management</h1>
-            <p class="subtitle">Orchestrate your autonomous mobile robots with intelligent, scalable solutions.</p>
-            <a href="#contact" class="cta-button">Get Started</a>
-        </div>
-    </section>
 
-    <!-- How It Works Section -->
-    <section class="section">
-        <div class="section-content">
-            <h2>How It Works</h2>
-            <p>Simple, efficient, and production-ready</p>
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">01</div>
-                    <h3>Integrate</h3>
-                    <p>Connect your robot fleet to our AI orchestration platform with minimal setup.</p>
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logo"><span>Novara</span> Robotics</div>
+        <a href="https://calendly.com/saayujd/30min" target="_blank" rel="noopener" class="nav-cta">Book a Demo</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <h1>Robot fleet orchestration with<br>built-in <span class="gradient-text">AI agents.</span></h1>
+        <p class="hero-sub">Dispatch tasks, integrate with your business systems, and onboard new robots effortlessly.</p>
+    </div>
+</section>
+
+<!-- Steps -->
+<section class="steps-section">
+    <div class="container">
+        <h2 class="steps-heading reveal">3 Steps: Connect. Command. Execute.</h2>
+
+        <!-- Step 1 -->
+        <div class="step-row reveal">
+            <div class="step-text">
+                <span class="step-label">Step 1: Connect</span>
+                <h3>Plug in your robots and business systems</h3>
+                <p>Connect your robot fleet — any vendor, any type — alongside your WMS, ERP, and MES. The agent handles configuration and integration so your robots and business systems talk to each other.</p>
+            </div>
+            <div class="step-visual">
+                <div class="terminal-line"><span class="cmd">&gt;</span> "Add our 4 MiR robots and link to SAP WMS"</div>
+                <div class="terminal-line"><span class="out">  Connecting fleet adapter...</span></div>
+                <div class="terminal-line"><span class="ok">  4 robots online.</span></div>
+                <div class="terminal-line"><span class="out">  Linking WMS webhook...</span></div>
+                <div class="terminal-line"><span class="ok">  SAP WMS connected. Events flowing.</span></div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-row reverse reveal">
+            <div class="step-text">
+                <span class="step-label">Step 2: Command</span>
+                <h3>Tell the fleet what you need</h3>
+                <p>Dispatch tasks, check status, or diagnose issues in plain language. The agent understands your facility, reasons about fleet state, and turns your words into validated robot commands.</p>
+            </div>
+            <div class="step-visual">
+                <div class="terminal-line"><span class="cmd">&gt;</span> "Clear staging area and move pallets to dock 3"</div>
+                <div class="terminal-line"><span class="out">  Checking robot availability...</span></div>
+                <div class="terminal-line"><span class="out">  Assigning cleanerBot_1 and deliveryBot_2</span></div>
+                <div class="terminal-line"><span class="ok">  Tasks dispatched. ETA 12 min.</span></div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-row reveal">
+            <div class="step-text">
+                <span class="step-label">Step 3: Execute</span>
+                <h3>The platform handles the rest</h3>
+                <p>Traffic coordination, task scheduling, conflict resolution, door and lift management — the software orchestrates it all. Business events from your WMS flow in and robot actions flow out, automatically.</p>
+            </div>
+            <div class="step-visual">
+                <div class="flow-item">
+                    <span class="flow-dot" style="background: var(--accent)"></span>
+                    <span class="flow-label">WMS order <span>— #4821 ready for fulfillment</span></span>
                 </div>
-                <div class="step">
-                    <div class="step-number">02</div>
-                    <h3>Optimize</h3>
-                    <p>Our AI learns your workflows and optimizes task allocation and navigation in real-time.</p>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item">
+                    <span class="flow-dot" style="background: var(--accent-secondary)"></span>
+                    <span class="flow-label">Platform <span>— schedules, routes, resolves conflicts</span></span>
                 </div>
-                <div class="step">
-                    <div class="step-number">03</div>
-                    <h3>Scale</h3>
-                    <p>Deploy across multiple facilities with centralized monitoring and control.</p>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item">
+                    <span class="flow-dot" style="background: #22c55e"></span>
+                    <span class="flow-label">Fleet <span>— deliveryBot_3 dispatched, task complete</span></span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Features Section -->
-    <section class="section features">
-        <div class="section-content">
-            <h2>Built for Manufacturing</h2>
-            <p>Enterprise-grade features for warehouse and factory automation</p>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h4>Multi-Robot Coordination</h4>
-                    <p>Seamlessly coordinate heterogeneous robot types - AMRs, AGVs, and robotic arms.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Real-Time Optimization</h4>
-                    <p>Dynamic path planning and task allocation using advanced control algorithms.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>LLM-Powered Control</h4>
-                    <p>Natural language commands and intelligent decision-making for complex workflows.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>24/7 Monitoring</h4>
-                    <p>Complete visibility into fleet status, performance metrics, and analytics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo"><span>Novara</span> Robotics</div>
+        <p>&copy; 2026 Novara Robotics</p>
+    </div>
+</footer>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="section-content">
-            <h2>Ready to Transform Your Operations?</h2>
-            <p>Get in touch to schedule a demo</p>
-            <a href="mailto:contact@yourcompany.com" class="cta-button" style="margin-top: 2rem;">Contact Us</a>
-        </div>
-    </section>
+<script>
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Your Company. All rights reserved.</p>
-    </footer>
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+</script>
 
-    <script>
-        // Scroll animation for sections
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.section-content').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
