@@ -159,15 +159,60 @@
             line-height: 1.7;
             color: var(--text-secondary);
             max-width: 560px;
-            margin: 0 auto;
+            margin: 0 auto 2rem;
             font-weight: 400;
             opacity: 0;
             animation: fadeUp 0.8s ease 0.35s forwards;
         }
 
+        .hero-mission {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.55s forwards;
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ───── Mission Band ───── */
+        .mission-band {
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 3.5rem 2rem;
+            text-align: center;
+        }
+
+        .mission-band .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .mission-band h2 {
+            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            max-width: 680px;
+            margin: 0 auto 0.75rem;
+            line-height: 1.4;
+        }
+
+        .mission-band p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
         /* ───── Steps Section ───── */
@@ -186,7 +231,15 @@
             font-size: clamp(2rem, 4vw, 2.8rem);
             font-weight: 700;
             letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        .steps-subheading {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-secondary);
             margin-bottom: 5rem;
+            line-height: 1.6;
         }
 
         .step-row {
@@ -258,7 +311,6 @@
 
         .step-visual:hover::before { opacity: 1; }
 
-        /* Terminal lines */
         .terminal-line {
             font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
             font-size: 0.84rem;
@@ -269,8 +321,8 @@
         .terminal-line .cmd { color: var(--accent); }
         .terminal-line .out { color: #6b7280; }
         .terminal-line .ok { color: #22c55e; }
+        .terminal-line .warn { color: #f59e0b; }
 
-        /* Flow visual */
         .flow-item {
             display: flex;
             align-items: center;
@@ -353,12 +405,10 @@
             .step-row.reverse .step-text { order: 1; }
             .step-row.reverse .step-visual { order: 2; }
 
-            .steps-heading { margin-bottom: 3.5rem; }
-
+            .steps-heading { margin-bottom: 0.75rem; }
+            .steps-subheading { margin-bottom: 3rem; }
             .steps-section { padding: 5rem 1.5rem; }
-
             .hero { padding: 7rem 1.5rem 4rem; }
-
             .nav-logo img { height: 40px; }
         }
     </style>
@@ -377,69 +427,82 @@
 <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-        <h1>Robot fleet orchestration with<br>built-in <span class="gradient-text">AI agents.</span></h1>
-        <p class="hero-sub">make robot fleets intelligent, adaptive, and effortless to manage.
-.</p>
+        <h1>AI-native <span class="gradient-text">fleet intelligence</span><br>for robot operations.</h1>
+        <p class="hero-sub">A single platform to manage your entire robot fleet, catch faults early, and guide your team from alert to fix across any Robot.</p>
     </div>
 </section>
+
+<!-- Mission Band -->
+<div class="mission-band reveal">
+    <p class="label">What we are building</p>
+    <h2>Robot fleets should run themselves. We are building toward that.</h2>
+    <p>Novara is starting with fleet visibility and improved fault detection and repair, and building toward complete operational intelligence where robot fleets monitor, adapt, and recover/fix with minimal human intervention.</p>
+</div>
 
 <!-- Steps -->
 <section class="steps-section">
     <div class="container">
-        <h2 class="steps-heading reveal">3 Steps: Connect. Command. Execute.</h2>
+        <h2 class="steps-heading reveal">How Novara works</h2>
+        <p class="steps-subheading reveal">Three layers that turn raw robot data into managed, reliable operations.</p>
 
         <!-- Step 1 -->
         <div class="step-row reveal">
             <div class="step-text">
-                <span class="step-label">Step 1: Connect</span>
-                <h3>Plug in your robots and business systems</h3>
-                <p>Connect to any mobile robot and any vendor.</p>
+                <span class="step-label">Step 1 — Connect</span>
+                <h3>Connect to any robot, any brand</h3>
+                <p>Novara pulls telemetry directly from your robots</p>
             </div>
             <div class="step-visual">
-                <div class="terminal-line"><span class="cmd">&gt;</span> "Add our 4 MiR robots and link to SAP WMS"</div>
-                <div class="terminal-line"><span class="out">  Connecting fleet adapter...</span></div>
-                <div class="terminal-line"><span class="ok">  4 robots online.</span></div>
-                <div class="terminal-line"><span class="out">  Linking WMS webhook...</span></div>
-                <div class="terminal-line"><span class="ok">  SAP WMS connected. Events flowing.</span></div>
+                <div class="terminal-line"><span class="cmd">&gt;</span> Connecting ABB IRB 6700 fleet...</div>
+                <div class="terminal-line"><span class="out">  Reading joint torque, temp, position via RWS</span></div>
+                <div class="terminal-line"><span class="ok">  6 robots online. Telemetry flowing.</span></div>
+                <div class="terminal-line"><span class="out">  Connecting MiR AMR fleet...</span></div>
+                <div class="terminal-line"><span class="ok">  4 AMRs online. Fleet unified.</span></div>
             </div>
         </div>
 
         <!-- Step 2 -->
         <div class="step-row reverse reveal">
             <div class="step-text">
-                <span class="step-label">Step 2: Command</span>
-                <h3>Tell the fleet what you need</h3>
-                <p>Design and assign tasks, analyze and troubleshoot with AI. The agent understands your facility, reasons about fleet state, and turns your words into validated robot commands.</p>
+                <span class="step-label">Step 2 — Detect</span>
+                <h3>Catch faults before they become failures</h3>
+                <p>Novara continuously monitors robot health across every joint and axis using AI.</p>
             </div>
             <div class="step-visual">
-                <div class="terminal-line"><span class="cmd">&gt;</span> "Clear staging area and move pallets to dock 3"</div>
-                <div class="terminal-line"><span class="out">  Checking robot availability...</span></div>
-                <div class="terminal-line"><span class="out">  Assigning cleanerBot_1 and deliveryBot_2</span></div>
-                <div class="terminal-line"><span class="ok">  Tasks dispatched. ETA 12 min.</span></div>
+                <div class="terminal-line"><span class="out">  Monitoring fleet health...</span></div>
+                <div class="terminal-line"><span class="warn">  ⚠ ABB_03 — J3 torque deviation -18% below baseline</span></div>
+                <div class="terminal-line"><span class="out">  Pattern: consistent over last 4 hrs</span></div>
+                <div class="terminal-line"><span class="out">  Confidence: high — early joint wear signal</span></div>
+                <div class="terminal-line"><span class="ok">  Alert sent. Maintenance window suggested.</span></div>
             </div>
         </div>
 
         <!-- Step 3 -->
         <div class="step-row reveal">
             <div class="step-text">
-                <span class="step-label">Step 3: Execute</span>
-                <h3>The platform handles the rest</h3>
-                <p>Traffic coordination, task scheduling, conflict resolution, door and lift management, the software orchestrates it all. Events from your business systems flow in and robot actions flow out, automatically.</p>
+                <span class="step-label">Step 3 — Recover</span>
+                <h3>Guide your team from alert to fix</h3>
+                <p>When a fault is detected, Novara tells you what is wrong, why it likely happened, and what to do next</p>
             </div>
             <div class="step-visual">
                 <div class="flow-item">
+                    <span class="flow-dot" style="background: #f59e0b"></span>
+                    <span class="flow-label">Fault detected <span>— ABB_03 J3 torque anomaly</span></span>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-item">
                     <span class="flow-dot" style="background: var(--accent)"></span>
-                    <span class="flow-label">WMS order <span>— #4821 ready for fulfillment</span></span>
+                    <span class="flow-label">AI diagnosis <span>— likely early gear wear, non-critical</span></span>
                 </div>
                 <div class="flow-arrow">↓</div>
                 <div class="flow-item">
                     <span class="flow-dot" style="background: var(--accent-secondary)"></span>
-                    <span class="flow-label">Platform <span>— schedules, routes, resolves conflicts</span></span>
+                    <span class="flow-label">Action <span>— fix joint 1 gear</span></span>
                 </div>
                 <div class="flow-arrow">↓</div>
                 <div class="flow-item">
                     <span class="flow-dot" style="background: #22c55e"></span>
-                    <span class="flow-label">Fleet <span>— deliveryBot_3 dispatched, task complete</span></span>
+                    <span class="flow-label">Resolved <span>— before production was affected</span></span>
                 </div>
             </div>
         </div>
