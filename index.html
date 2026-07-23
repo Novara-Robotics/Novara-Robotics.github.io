@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Novara Robotics: Machines That Report Their Own Condition</title>
 <meta name="description" content="Novara Robotics unifies machine sensors, documents, and repair history into one blueprint-grade maintenance record, so the root cause is ready before your technician arrives.">
-<link rel="icon" href="./assets/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="./assets/favicon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -173,15 +174,6 @@ a, button, [role="button"], input, textarea, select {
   mask-image: linear-gradient(to bottom, black, transparent 85%);
 }
 .hero-content { position: relative; z-index: 1; }
-.hero-top-row { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-8); margin-bottom: var(--space-10); }
-.hero-serial { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-faint); text-align: right; line-height: 1.7; }
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary); font-family: var(--font-mono);
-  padding: var(--space-2) var(--space-4); border: 1.5px solid var(--color-primary);
-  border-radius: var(--radius-sm);
-}
-.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); animation: pulse-dot 2s ease-in-out infinite; }
 @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.25} }
 
 .hero-main-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--space-14); align-items: start; }
@@ -302,8 +294,6 @@ a, button, [role="button"], input, textarea, select {
   .schematic-row { grid-template-columns: 1fr; gap: var(--space-4); }
   .metric-row { grid-template-columns: 1fr 1fr; }
   .metric-cell:nth-child(2) { border-right: none; }
-  .hero-top-row { flex-direction: column; gap: var(--space-4); }
-  .hero-serial { text-align: left; }
 }
 @media (max-width: 500px) {
   .metric-row { grid-template-columns: 1fr 1fr; }
@@ -342,12 +332,6 @@ a, button, [role="button"], input, textarea, select {
 <section class="hero" id="top">
   <div class="hero-bg-grid" aria-hidden="true"></div>
   <div class="container hero-content">
-    <div class="hero-top-row">
-    
-      <div class="hero-serial mono">
-        
-      </div>
-    </div>
     <div class="hero-main-grid">
       <div class="reveal is-visible">
         <h1>Every machine keeps<br>a record.<br><span class="accent-underline">Now it talks back.</span></h1>
@@ -372,7 +356,7 @@ a, button, [role="button"], input, textarea, select {
 
 <section class="section" id="problem">
   <div class="container">
-    <h2 class="section-title reveal">The plant runs on memory. unwritten, unaudited, liability.</h2>
+    <h2 class="section-title reveal">The plant runs on memory. Unwritten, unaudited, liable.</h2>
 
     <div class="dossier-grid">
       <div class="dossier-img-frame reveal">
@@ -421,7 +405,7 @@ a, button, [role="button"], input, textarea, select {
 
     <div class="faultpath reveal">
       <div class="faultpath-header">
-        <h3>Fault Path, the evidence, not a black box score</h3>
+        <h3>Fault Path &mdash; the evidence, not a black box score</h3>
         <span class="mono">CASE NO. INC&#8209;3891</span>
       </div>
       <div class="faultpath-body">
@@ -476,7 +460,7 @@ a, button, [role="button"], input, textarea, select {
       </div>
       <div class="procedure-step reveal">
         <span class="procedure-num mono">02</span>
-        <div class="procedure-content"><h3>Run in the cloud or on-prem, your infrastructure, your call</h3></div>
+        <div class="procedure-content"><h3>Run in the cloud or on-prem &mdash; your infrastructure, your call</h3></div>
       </div>
       <div class="procedure-step reveal">
         <span class="procedure-num mono">03</span>
