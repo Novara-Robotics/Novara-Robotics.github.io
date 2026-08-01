@@ -1,620 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Novara Robotics: Machines That Report Their Own Condition</title>
-<meta name="description" content="Novara Robotics unifies machine sensors, documents, and repair history into one blueprint-grade maintenance record, so the root cause is ready before your technician arrives.">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/assets/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="/assets/favicon.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Fraunces:opsz,wght@9..144,400..700&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
-
-<script src="./config.js"></script>
-
-<style>
-/* ============================================
-   ART DIRECTION — Novara Robotics
-   Concept: patent-blueprint / industrial nameplate.
-   Not soft, not warm-cream retro — cold blueprint navy,
-   chrome/steel neutrals, safety-yellow accent, technical
-   serial-number and dimension-line motifs throughout.
-   Typography: Fraunces (display, engraved nameplate serif)
-   + Space Mono (labels/data, monospace like stamped part
-   numbers) + General Sans (body, clean and legible)
-   Density: dense/technical — feels like reading equipment
-   documentation, not a marketing brochure
-   ============================================ */
-
-:root {
-  --color-bg:             #fafafa;
-  --color-surface:        #ffffff;
-  --color-surface-2:      #f5f5f5;
-  --color-surface-offset: #eeeeee;
-  --color-surface-offset-2: #e5e5e5;
-  --color-surface-dynamic: #d4d4d4;
-  --color-divider:        #eaeaea;
-  --color-border:         #e0e0e0;
-
-  --color-text:           #171717;
-  --color-text-muted:     #525252;
-  --color-text-faint:     #a3a3a3;
-  --color-text-inverse:   #fafafa;
-
-  --color-primary:        #0c2f4d;
-  --color-primary-hover:  #0a2440;
-  --color-primary-active: #081b30;
-  --color-primary-highlight: #c9d6e0;
-
-  --color-accent:         #d9a916;
-  --color-accent-hover:   #bd9111;
-  --color-accent-highlight: #f2e2ac;
-
-  --color-blueprint:      #12385c;
-  --color-blueprint-line: #7fa8c9;
-
-  --color-warning:        #a8531c;
-  --color-error:          #9c2c2c;
-  --color-success:        #2f6b45;
-
-  --radius-sm: 0.2rem;
-  --radius-md: 0.3rem;
-  --radius-lg: 0.45rem;
-  --radius-xl: 0.6rem;
-  --radius-full: 9999px;
-
-  --transition-interactive: 160ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  --shadow-sm: 0 1px 2px oklch(0.2 0 0 / 0.12);
-  --shadow-md: 0 6px 16px oklch(0.2 0 0 / 0.14);
-  --shadow-lg: 0 20px 48px oklch(0.2 0 0 / 0.18);
-
-  --content-narrow: 640px;
-  --content-default: 1020px;
-  --content-wide: 1280px;
-  --content-full: 100%;
-
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-mono: 'Space Mono', 'Courier New', monospace;
-  --font-body: 'General Sans', 'Inter', sans-serif;
-}
-
-:root {
-  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
-  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
-  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
-  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
-  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
-  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
-  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
-  --text-hero: clamp(2.75rem,  0.5rem  + 6vw,    6.5rem);
-
-  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
-  --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
-  --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem; --space-32: 8rem;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html {
-  -webkit-text-size-adjust: none; text-size-adjust: none;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility; scroll-behavior: smooth;
-  hanging-punctuation: first last; scroll-padding-top: var(--space-16);
-}
-body {
-  min-height: 100dvh; line-height: 1.6; font-family: var(--font-body);
-  font-size: var(--text-base); color: var(--color-text); background-color: var(--color-bg);
-}
-img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
-ul[role="list"], ol[role="list"] { list-style: none; }
-input, button, textarea, select { font: inherit; color: inherit; }
-h1, h2, h3, h4 { text-wrap: balance; line-height: 1.08; font-family: var(--font-display); }
-p, li, figcaption { text-wrap: pretty; }
-::selection { background: color-mix(in oklch, var(--color-accent) 40%, transparent); color: var(--color-text); }
-:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: var(--radius-sm); }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-}
-button { cursor: pointer; background: none; border: none; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
-.mono { font-family: var(--font-mono); }
-
-a, button, [role="button"], input, textarea, select {
-  transition: color var(--transition-interactive), background var(--transition-interactive),
-              border-color var(--transition-interactive), box-shadow var(--transition-interactive),
-              transform var(--transition-interactive);
-}
-
-.container { max-width: var(--content-default); margin-inline: auto; padding-inline: var(--space-5); }
-.container-wide { max-width: var(--content-wide); margin-inline: auto; padding-inline: var(--space-5); }
-
-
-/* ============ NAV ============ */
-.site-header {
-  position: sticky; top: 0; z-index: 100;
-  background: #ffffff;
-  border-bottom: 1px solid var(--color-border);
-}
-.nav { display: flex; align-items: center; justify-content: space-between; padding-block: var(--space-4); }
-.nav-brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--color-text); }
-.nav-brand img { height: 36px; width: auto; display: block; }
-.nav-links { display: flex; align-items: center; gap: var(--space-8); list-style: none; }
-.nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: var(--text-sm); font-weight: 500; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.03em; }
-.nav-links a:hover { color: var(--color-text); }
-.nav-actions { display: flex; align-items: center; gap: var(--space-3); }
-.nav-mobile-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: var(--radius-md); }
-
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
-  font-size: var(--text-sm); font-weight: 700; padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-sm); text-decoration: none; white-space: nowrap; border: 1.5px solid transparent;
-  line-height: 1; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.03em;
-}
-.btn-primary { background: var(--color-accent); color: #14100a; box-shadow: var(--shadow-sm); border-color: var(--color-accent); }
-.btn-primary:hover { background: var(--color-accent-hover); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-.btn-primary:active { transform: translateY(0); }
-.btn-dark { background: var(--color-primary); color: var(--color-text-inverse); border-color: var(--color-primary); }
-.btn-dark:hover { background: var(--color-primary-hover); transform: translateY(-1px); }
-.btn-ghost { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-text); }
-.btn-ghost:hover { background: color-mix(in oklch, var(--color-text) 6%, transparent); }
-.btn-lg { padding: var(--space-4) var(--space-8); font-size: var(--text-sm); }
-
-/* ============ HERO — asymmetric blueprint, rotated frame ============ */
-.hero { padding-block: clamp(var(--space-12), 8vw, var(--space-20)) clamp(var(--space-16), 8vw, var(--space-24)); position: relative; overflow: hidden; }
-.hero-bg-grid {
-  position: absolute; inset: 0; z-index: 0; opacity: 0.5;
-  background-image:
-    linear-gradient(color-mix(in oklch, var(--color-text) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklch, var(--color-text) 6%, transparent) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: linear-gradient(to bottom, black, transparent 85%);
-}
-.hero-content { position: relative; z-index: 1; }
-@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.25} }
-
-.hero-main-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--space-14); align-items: start; }
-.hero h1 { font-size: var(--text-hero); font-weight: 500; letter-spacing: -0.02em; margin-bottom: var(--space-6); }
-.hero h1 .accent-underline { position: relative; white-space: nowrap; }
-.hero h1 .accent-underline::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0.05em; height: 0.14em;
-  background: var(--color-accent); z-index: -1; opacity: 0.6;
-}
-.hero-sub { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 48ch; }
-
-.hero-panel {
-  border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);
-  box-shadow: var(--shadow-lg); overflow: hidden; transform: rotate(-1.2deg);
-}
-.hero-panel-header {
-  display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) var(--space-4);
-  border-bottom: 1.5px solid var(--color-border); font-family: var(--font-mono); font-size: var(--text-xs);
-  color: var(--color-text-muted); background: var(--color-surface-2);
-}
-.hero-panel-header .rec { display: flex; align-items: center; gap: var(--space-2); color: var(--color-error); font-weight: 700; }
-.hero-panel-header .rec .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-error); animation: pulse-dot 1.4s ease-in-out infinite; }
-.hero-panel img { width: 100%; display: block; }
-.hero-panel-footer { padding: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); }
-.hero-panel-footer .k { color: var(--color-text-faint); text-transform: uppercase; letter-spacing: 0.05em; }
-.hero-panel-footer .v { color: var(--color-text); font-weight: 700; display: block; margin-top: 2px; }
-.hero-panel-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-
-/* ============ SECTION SHARED ============ */
-.section { padding-block: clamp(var(--space-16), 8vw, var(--space-24)); border-top: 1px solid var(--color-divider); }
-.section-title { font-size: var(--text-2xl); font-weight: 500; margin-bottom: var(--space-5); max-width: 26ch; }
-.section-desc { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 62ch; }
-
-/* ============ PROBLEM — dossier / case-file layout ============ */
-.dossier-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--space-16); align-items: stretch; margin-top: var(--space-12); }
-.dossier-img-frame { border: 1.5px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); }
-.dossier-img-frame img { width: 100%; display: block; }
-.dossier-list { border-top: 1.5px solid var(--color-text); display: flex; flex-direction: column; height: 100%; }
-.dossier-item { display: grid; grid-template-columns: 90px 1fr; gap: var(--space-5); padding-block: var(--space-6); border-bottom: 1px solid var(--color-divider); flex: 1; align-items: center; }
-.dossier-code { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent-hover); font-weight: 700; }
-.dossier-item h3 { font-size: var(--text-lg); font-weight: 600; font-family: var(--font-body); margin: 0; }
-
-/* ============ PRODUCT — schematic diagram layout ============ */
-.schematic { margin-top: var(--space-14); }
-.schematic-row {
-  display: grid; grid-template-columns: 240px 1fr; gap: var(--space-8); align-items: center;
-  padding-block: var(--space-8); border-bottom: 1px solid var(--color-divider); position: relative;
-}
-.schematic-row:first-child { border-top: 1px solid var(--color-divider); }
-.schematic-tag {
-  font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--color-text-inverse); background: var(--color-primary); padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm); display: inline-block; width: fit-content;
-}
-.schematic-copy h3 { font-size: var(--text-lg); font-family: var(--font-body); font-weight: 600; margin-bottom: var(--space-2); }
-.schematic-copy p { color: var(--color-text-muted); font-size: var(--text-base); max-width: 62ch; }
-
-/* Fault Path signature diagram */
-.faultpath { margin-top: var(--space-16); border: 1.5px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md); }
-.faultpath-header { background: var(--color-primary); color: var(--color-text-inverse); padding: var(--space-5) var(--space-8); display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
-.faultpath-header h3 { color: inherit; font-size: var(--text-lg); font-family: var(--font-body); font-weight: 600; }
-.faultpath-header span { font-family: var(--font-mono); font-size: var(--text-xs); opacity: 0.75; }
-.faultpath-body { padding: var(--space-8); background: var(--color-surface); }
-.faultpath-chain { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
-.faultpath-node {
-  flex: 1; min-width: 160px; border: 1.5px solid var(--color-border); border-radius: var(--radius-md);
-  padding: var(--space-4); background: var(--color-surface-2);
-}
-.faultpath-node .lbl { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-faint); margin-bottom: var(--space-2); display: block; }
-.faultpath-node .val { font-weight: 600; font-size: var(--text-sm); }
-.faultpath-node.flagged { border-color: var(--color-accent); background: color-mix(in oklch, var(--color-accent) 8%, var(--color-surface-2)); }
-.faultpath-arrow { color: var(--color-text-faint); font-size: var(--text-lg); padding-inline: var(--space-3); flex-shrink: 0; }
-
-/* ============ NUMBERS — ledger table, not dark card ============ */
-.ledger { margin-top: var(--space-12); border: 1.5px solid var(--color-text); border-radius: var(--radius-md); overflow: hidden; }
-.ledger-header { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-5) var(--space-8); background: var(--color-text); color: var(--color-bg); }
-.ledger-header h3 { color: inherit; font-size: var(--text-lg); font-family: var(--font-body); font-weight: 600; }
-.ledger-header span { font-family: var(--font-mono); font-size: var(--text-xs); opacity: 0.7; }
-.ledger-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-6); padding: var(--space-5) var(--space-8); border-bottom: 1px solid var(--color-divider); align-items: baseline; }
-.ledger-row:last-child { border-bottom: none; }
-.ledger-row .k { color: var(--color-text-muted); font-size: var(--text-sm); }
-.ledger-row .v { font-family: var(--font-mono); font-weight: 700; font-size: var(--text-lg); font-variant-numeric: tabular-nums; }
-.ledger-row.total { background: color-mix(in oklch, var(--color-accent) 10%, transparent); }
-.ledger-row.total .k { color: var(--color-text); font-weight: 700; }
-.ledger-row.total .v { color: var(--color-accent-hover); font-size: var(--text-xl); }
-.ledger-note { padding: var(--space-5) var(--space-8); font-size: var(--text-xs); color: var(--color-text-faint); border-top: 1px dashed var(--color-divider); }
-
-.metric-row { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--space-10); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); }
-.metric-cell { padding: var(--space-6) var(--space-4); border-right: 1px solid var(--color-divider); }
-.metric-cell:last-child { border-right: none; }
-.metric-num { font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700; color: var(--color-primary); }
-.metric-label { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-2); text-transform: uppercase; letter-spacing: 0.03em; }
-
-/* ============ HOW IT WORKS — vertical procedure numbering, like assembly instructions ============ */
-.procedure { margin-top: var(--space-16); }
-.procedure-step { display: grid; grid-template-columns: 72px 1fr; gap: var(--space-6); align-items: center; border-top: 1px solid var(--color-divider); padding-block: var(--space-12); }
-.procedure-step:last-child { border-bottom: 1px solid var(--color-divider); }
-.procedure-num { font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700; color: var(--color-text-faint); line-height: 1.2; }
-.procedure-content h3 { font-size: var(--text-lg); font-family: var(--font-body); font-weight: 600; margin: 0; line-height: 1.4; }
-
-/* ============ REQUEST A DEMO ============ */
-.demo-section { background: var(--color-primary); border-top: none; }
-.demo-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center;
-}
-.demo-copy .section-title { color: var(--color-text-inverse); max-width: 20ch; }
-.demo-copy .section-desc { color: color-mix(in oklch, var(--color-text-inverse) 70%, transparent); }
-.demo-copy .demo-checklist { list-style: none; margin-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-3); }
-.demo-copy .demo-checklist li {
-  display: flex; align-items: flex-start; gap: var(--space-3);
-  font-size: var(--text-sm); color: color-mix(in oklch, var(--color-text-inverse) 80%, transparent);
-}
-.demo-copy .demo-checklist li::before {
-  content: "✓"; flex-shrink: 0; font-family: var(--font-mono); font-weight: 700;
-  color: var(--color-accent); margin-top: 1px;
-}
-.demo-card {
-  border: 1.5px solid color-mix(in oklch, var(--color-text-inverse) 20%, transparent);
-  border-radius: var(--radius-md); background: color-mix(in oklch, var(--color-text-inverse) 5%, transparent);
-  padding: var(--space-10); display: flex; flex-direction: column; gap: var(--space-6);
-}
-.demo-card-label {
-  font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--color-accent); font-weight: 700;
-}
-.demo-card-title {
-  font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500;
-  color: var(--color-text-inverse); line-height: 1.2;
-}
-.demo-card-meta {
-  display: flex; flex-direction: column; gap: var(--space-3);
-}
-.demo-card-meta-item {
-  display: flex; align-items: center; gap: var(--space-3);
-  font-family: var(--font-mono); font-size: var(--text-xs); color: color-mix(in oklch, var(--color-text-inverse) 65%, transparent);
-}
-.demo-card-meta-item svg { flex-shrink: 0; opacity: 0.7; }
-.demo-card .btn-book-demo {
-  width: 100%; justify-content: center; padding: var(--space-4) var(--space-8);
-  font-size: var(--text-sm); background: var(--color-accent); color: #14100a; border-color: var(--color-accent);
-}
-.demo-card .btn-book-demo:hover { background: var(--color-accent-hover); transform: translateY(-1px); box-shadow: 0 8px 24px oklch(0.2 0 0 / 0.25); }
-.demo-card-note { font-size: var(--text-xs); color: color-mix(in oklch, var(--color-text-inverse) 45%, transparent); text-align: center; font-family: var(--font-mono); }
-@media (max-width: 900px) {
-  .demo-inner { grid-template-columns: 1fr; gap: var(--space-10); }
-}
-
-/* ============ FOOTER ============ */
-.site-footer { border-top: 1.5px solid var(--color-text); padding-block: var(--space-8); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: var(--text-xs); color: var(--color-text-faint); flex-wrap: wrap; gap: var(--space-4); font-family: var(--font-mono); }
-.footer-bottom a { color: var(--color-text-muted); text-decoration: none; }
-.footer-bottom a:hover { color: var(--color-text); }
-
-/* ============ SCROLL REVEAL ============ */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1); }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-/* ============ MOBILE ============ */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .nav-mobile-toggle { display: flex; }
-  .hero-main-grid, .dossier-grid { grid-template-columns: 1fr; gap: var(--space-10); }
-  .hero h1 { font-size: clamp(2.25rem, 8vw, 3.5rem); }
-  .hero-panel { transform: none; }
-  .schematic-row { grid-template-columns: 1fr; gap: var(--space-4); }
-  .metric-row { grid-template-columns: 1fr 1fr; }
-  .metric-cell:nth-child(2) { border-right: none; }
-}
-@media (max-width: 500px) {
-  .metric-row { grid-template-columns: 1fr 1fr; }
-  .procedure-step { grid-template-columns: 40px 1fr; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deri by Novara Robotics | AI Reliability Engineer for Factories</title>
+  <meta name="description" content="Deri monitors factory equipment, detects emerging issues, investigates failures, guides recovery, and learns from every incident across machines, robots, and production systems.">
+  <meta property="og:title" content="Deri by Novara Robotics | AI Reliability Engineer for Factories">
+  <meta property="og:description" content="Deri monitors factory equipment, detects emerging issues, investigates failures, guides recovery, and learns from every incident across machines, robots, and production systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./assets/logo.png">
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./config.js" defer></script>
+  <script src="./script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<a href="#main" class="sr-only">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="nav-brand" aria-label="Novara Robotics home">
+        <img src="./assets/logo.png" alt="Novara Robotics" width="140" height="36">
+      </a>
 
-<header class="site-header">
-  <div class="container nav">
-    <a href="#top" class="nav-brand">
-      <img src="./assets/logo.png" alt="Novara Robotics">
-    </a>
-    <nav aria-label="Primary">
-      <ul class="nav-links">
-        <li><a href="#problem">Problem</a></li>
-        <li><a href="#product">System</a></li>
-        <li><a href="#numbers">Figures</a></li>
-        <li><a href="#how">Deploy</a></li>
-        <li><a href="#demo">Demo</a></li>
-      </ul>
-    </nav>
-    <div class="nav-actions">
-      <a href="#" class="btn btn-primary btn-book-demo">Request demo</a>
-      <button class="nav-mobile-toggle" aria-label="Open menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
+      <nav class="nav-primary" aria-label="Primary">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#product">Product</a></li>
+          <li><a href="#deployment">Deployment</a></li>
+          <li><a href="#outcomes">Outcomes</a></li>
+          <li><a href="#pilot">Pilot</a></li>
+        </ul>
+      </nav>
 
-<main id="main">
-
-<section class="hero" id="top">
-  <div class="hero-bg-grid" aria-hidden="true"></div>
-  <div class="container hero-content">
-    <div class="hero-main-grid">
-      <div class="reveal is-visible">
-        <h1>Every machine keeps<br>a record.<br><span class="accent-underline">Now it talks back.</span></h1>
-        <p class="hero-sub">Novara Robotics reads the sensors, cross-references the manuals, and drafts the root cause before your technician reaches the floor. A maintenance record that writes and defends itself.</p>
+      <div class="nav-actions">
+        <a href="#" class="btn btn-accent btn-partner">Partner with us</a>
+        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
       </div>
-      <div class="hero-panel reveal is-visible">
-        <div class="hero-panel-header">
-          <span class="mono">UNIT: PRESS&#8209;04 / DRIVE&#8209;END</span>
-          <span class="rec"><span class="dot"></span>LIVE</span>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <h1 id="hero-title" class="hero-title">DERI</h1>
+        <p class="hero-category">The AI reliability engineer for factories.</p>
+        <p class="hero-tagline">better visibility. faster response. less downtime.</p>
+        <p class="hero-support">Deri monitors equipment, detects emerging issues, investigates failures, guides recovery, and learns from every incident across machines, robots, and production systems.</p>
+      </div>
+    </section>
+
+    <!-- ========== HOW DERI WORKS ========== -->
+    <section class="section" id="product" aria-labelledby="product-heading">
+      <div class="container">
+        <p class="section-label">How Deri works</p>
+        <h2 id="product-heading" class="section-title">From early warning to verified resolution.</h2>
+        <p class="section-lead">Deri brings live equipment signals, alarms, manuals, work orders, maintenance history, previous incidents, and technician knowledge into one reliability workflow.</p>
+
+        <ol class="loop" role="list">
+          <li class="loop-stage reveal">
+            <span class="loop-num" aria-hidden="true">01</span>
+            <h3 class="loop-title">Monitor</h3>
+            <p class="loop-copy">Deri watches machine and process signals, alarms, and operational events to surface anomalies, changing equipment behavior, and emerging failure patterns.</p>
+            <ul class="loop-points">
+              <li>Machine and robot telemetry</li>
+              <li>PLC alarms and events</li>
+              <li>Sensor data and process variables</li>
+              <li>Equipment states and operating patterns</li>
+            </ul>
+          </li>
+          <li class="loop-stage reveal">
+            <span class="loop-num" aria-hidden="true">02</span>
+            <h3 class="loop-title">Investigate</h3>
+            <p class="loop-copy">When an issue appears, Deri automatically assembles the relevant evidence from live machine states, recent changes, manuals, SOPs, work orders, maintenance history, and similar past incidents.</p>
+            <ul class="loop-points">
+              <li>Ranks likely causes</li>
+              <li>Shows supporting evidence</li>
+              <li>Does not state root cause as certainty</li>
+            </ul>
+          </li>
+          <li class="loop-stage reveal">
+            <span class="loop-num" aria-hidden="true">03</span>
+            <h3 class="loop-title">Resolve</h3>
+            <p class="loop-copy">Deri recommends the next diagnostic checks, guides technicians through recovery, coordinates escalation, and supports approved operational actions within customer-defined permissions.</p>
+            <ul class="loop-points">
+              <li>Recommended next steps and questions</li>
+              <li>Manuals, procedures, and similar incidents</li>
+              <li>Incident and work-order updates</li>
+              <li>Escalation recommendations</li>
+            </ul>
+          </li>
+          <li class="loop-stage reveal">
+            <span class="loop-num" aria-hidden="true">04</span>
+            <h3 class="loop-title">Learn</h3>
+            <p class="loop-copy">After the issue is resolved, Deri records the symptoms, actions, causes, and outcomes so the next response begins with more context.</p>
+            <ul class="loop-points">
+              <li>Structured incident history</li>
+              <li>Searchable repair knowledge</li>
+              <li>Better shift handovers</li>
+              <li>Recurring-failure identification</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== PRODUCT IN ACTION ========== -->
+    <section class="section section-action" id="action" aria-labelledby="action-heading">
+      <div class="container">
+        <p class="section-label">Product in action</p>
+        <h2 id="action-heading" class="section-title sr-only">How teams use Deri</h2>
+
+        <!--
+          PRODUCT SCREENSHOT: Manager / supervisor dashboard
+          Replace the placeholder below with:
+          <img src="./assets/manager-dashboard.png" alt="Deri manager dashboard showing equipment health, anomalies, and active reliability incidents." width="1280" height="800" loading="lazy" decoding="async">
+        -->
+        <div class="action-block reveal">
+          <div class="action-copy">
+            <p class="action-view">Manager / supervisor view</p>
+            <h3 class="action-title">Detect problems before they become downtime.</h3>
+            <p class="action-lead">Deri combines live equipment signals with operational history to surface abnormal behavior, recurring patterns, and maintenance needs. Managers and supervisors see what changed, why it matters, and which assets require attention.</p>
+            <ul class="action-points">
+              <li>Equipment and production-system visibility</li>
+              <li>Anomaly and incident prioritization</li>
+              <li>Emerging failure patterns and recurring issues</li>
+              <li>Recommended maintenance attention</li>
+              <li>Cross-asset or cross-line trends</li>
+            </ul>
+          </div>
+          <div class="action-media">
+            <div class="browser-frame" role="img" aria-label="Deri manager dashboard showing equipment health, anomalies, and active reliability incidents.">
+              <div class="browser-chrome" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <span class="browser-url">deri · manager dashboard</span>
+              </div>
+              <div class="media-placeholder">
+                <span class="media-placeholder-label">manager-dashboard.png</span>
+                <span class="media-placeholder-hint">Wide dashboard screenshot placeholder</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <img src="./assets/hero-blueprint.png" alt="Blueprint-style patent diagram of an industrial gauge control panel" width="1536" height="1024" loading="lazy" decoding="async">
-        <div class="hero-panel-footer">
-          <div class="hero-panel-footer-grid">
-            <div><span class="k">VIBRATION</span><span class="v" style="color:var(--color-accent-hover)">+42% BASELINE</span></div>
-            <div><span class="k">CONFIDENCE</span><span class="v">78%</span></div>
+
+        <!--
+          PRODUCT SCREENSHOT: Technician / operator mobile app
+          Replace the placeholder below with:
+          <img src="./assets/technician-app.png" alt="Deri technician application showing incident context, likely causes, and guided diagnostic actions." width="780" height="1680" loading="lazy" decoding="async">
+        -->
+        <div class="action-block action-block-reverse reveal">
+          <div class="action-media action-media-phone">
+            <div class="phone-frame" role="img" aria-label="Deri technician application showing incident context, likely causes, and guided diagnostic actions.">
+              <div class="phone-notch" aria-hidden="true"></div>
+              <div class="media-placeholder media-placeholder-phone">
+                <span class="media-placeholder-label">technician-app.png</span>
+                <span class="media-placeholder-hint">Mobile app screenshot placeholder</span>
+              </div>
+            </div>
+          </div>
+          <div class="action-copy">
+            <p class="action-view">Technician / operator view</p>
+            <h3 class="action-title">Manage incidents from alarm to resolution.</h3>
+            <p class="action-lead">When equipment fails, Deri builds the incident context, surfaces likely causes and supporting evidence, guides the technician through diagnosis, and records what restored production.</p>
+            <ul class="action-points">
+              <li>Active incident context</li>
+              <li>Ranked likely causes with evidence</li>
+              <li>Relevant manuals, SOPs, and similar repairs</li>
+              <li>Guided diagnostic steps</li>
+              <li>Technician notes, work-order updates, and resolution documentation</li>
+            </ul>
+            <p class="action-note">Deri is not merely a chatbot. It works with operational context, incident evidence, maintenance records, and structured workflows.</p>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section" id="problem">
-  <div class="container">
-    <h2 class="section-title reveal">The plant runs on memory. Unwritten, unaudited, liable.</h2>
+    <!-- ========== DEPLOYMENT ========== -->
+    <section class="section" id="deployment" aria-labelledby="deployment-heading">
+      <div class="container">
+        <p class="section-label">Deployment</p>
+        <h2 id="deployment-heading" class="section-title">Built to fit your factory, not disrupt it.</h2>
+        <p class="section-lead">Start with one workflow or equipment group, connect only the systems required, and expand after value has been demonstrated.</p>
 
-    <div class="dossier-grid">
-      <div class="dossier-img-frame reveal">
-        <img src="./assets/problem-blueprint.png" alt="Blueprint-style patent diagram of aging factory equipment and paper technical manuals" width="1024" height="1536" loading="lazy" decoding="async">
-      </div>
-      <div class="dossier-list reveal">
-        <div class="dossier-item">
-          <span class="dossier-code mono">DEF&#8209;01</span>
-          <div><h3>Institutional knowledge has no backup</h3></div>
+        <div class="spec-list">
+          <div class="spec-row reveal">
+            <h3 class="spec-title">Start narrow</h3>
+            <div class="spec-body">
+              <p>Begin with one recurring incident, selected asset group, or reliability workflow instead of attempting a plant-wide rollout on day one.</p>
+              <ul>
+                <li>Focused initial scope and defined operational workflow</li>
+                <li>Selected machines or production systems</li>
+                <li>Agreed success criteria before expansion</li>
+              </ul>
+            </div>
+          </div>
+          <div class="spec-row reveal">
+            <h3 class="spec-title">Work with existing systems</h3>
+            <div class="spec-body">
+              <p>Deri can operate alongside current workflows or connect with selected factory systems, including PLCs, robots, sensors, historians, MES, CMMS, manuals, SOPs, and maintenance records.</p>
+              <ul>
+                <li>No rip-and-replace requirement</li>
+                <li>Standalone, parallel, or integrated deployment</li>
+                <li>Connect only the systems needed for the initial workflow</li>
+                <li>Existing systems remain systems of record where appropriate</li>
+              </ul>
+            </div>
+          </div>
+          <div class="spec-row reveal">
+            <h3 class="spec-title">Deploy your way</h3>
+            <div class="spec-body">
+              <p>Run Deri in the cloud, in a hybrid configuration, or on-premises using the Novara OT Box, depending on plant requirements.</p>
+              <ul>
+                <li>Cloud, hybrid, or on-premises architecture</li>
+                <li>Restricted-network or air-gapped environments where technically feasible</li>
+                <li>Customer-selected deployment model</li>
+              </ul>
+            </div>
+          </div>
+          <div class="spec-row reveal">
+            <h3 class="spec-title">Stay in control</h3>
+            <div class="spec-body">
+              <p>Deployments can begin in read-only mode. Data access, user permissions, and operational actions remain governed by customer-defined controls and human approvals.</p>
+              <ul>
+                <li>Read-only starting mode</li>
+                <li>Role-based permissions and customer-controlled access</li>
+                <li>Human approval for operational actions</li>
+                <li>Evidence shown behind recommendations</li>
+                <li>Auditability of incident actions and outcomes</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="dossier-item">
-          <span class="dossier-code mono">DEF&#8209;02</span>
-          <div><h3>Signal-to-noise collapses at scale</h3></div>
-        </div>
-        <div class="dossier-item">
-          <span class="dossier-code mono">DEF&#8209;03</span>
-          <div><h3>Documentation is unaudited and unlinked</h3></div>
-        </div>
-        <div class="dossier-item">
-          <span class="dossier-code mono">DEF&#8209;04</span>
-          <div><h3>Root cause is reconstructed from scratch, every time</h3></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="product">
-  <div class="container">
-    <h2 class="section-title reveal">One connected record. Every machine, sensor, and repair.</h2>
-
-    <div class="schematic">
-      <div class="schematic-row reveal">
-        <span class="schematic-tag">01 &middot; UNIFY</span>
-        <div class="schematic-copy"><h3>Sensors, manuals, and history on one record</h3></div>
-      </div>
-      <div class="schematic-row reveal">
-        <span class="schematic-tag">02 &middot; INVESTIGATE</span>
-        <div class="schematic-copy"><h3>The case file opens itself</h3></div>
-      </div>
-      <div class="schematic-row reveal">
-        <span class="schematic-tag">03 &middot; COMPOUND</span>
-        <div class="schematic-copy"><h3>Every repair strengthens the next diagnosis</h3></div>
-      </div>
-    </div>
-
-    <div class="faultpath reveal">
-      <div class="faultpath-header">
-        <h3>Fault Path &mdash; the evidence, not a black box score</h3>
-        <span class="mono">CASE NO. INC&#8209;3891</span>
-      </div>
-      <div class="faultpath-body">
-        <div class="faultpath-chain">
-          <div class="faultpath-node flagged"><span class="lbl">Signal</span><span class="val">Vibration +42%</span></div>
-          <span class="faultpath-arrow">&#8594;</span>
-          <div class="faultpath-node"><span class="lbl">Component</span><span class="val">Drive-end bearing</span></div>
-          <span class="faultpath-arrow">&#8594;</span>
-          <div class="faultpath-node"><span class="lbl">Hypothesis</span><span class="val">Bearing wear, 78%</span></div>
-          <span class="faultpath-arrow">&#8594;</span>
-          <div class="faultpath-node"><span class="lbl">Action</span><span class="val">Inspect within 8h</span></div>
+        <div class="onboarding reveal">
+          <h3 class="onboarding-title">Novara handles the rollout.</h3>
+          <p class="onboarding-lead">Novara works with your operations, maintenance, controls, and IT or OT teams to configure the workflow, map the relevant data, integrate selected systems, train users, and support the deployment.</p>
+          <ol class="onboarding-steps">
+            <li>Select the workflow and success metrics</li>
+            <li>Identify the required systems and data</li>
+            <li>Configure integrations and operational context</li>
+            <li>Train the relevant users</li>
+            <li>Launch the focused deployment</li>
+            <li>Review results and decide whether to expand</li>
+          </ol>
+          <p class="onboarding-note">Focused deployments are scoped around the selected systems, workflow, and plant requirements. The initial deployment is designed to minimize customer effort and avoid unnecessary operational disruption.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section" id="numbers">
-  <div class="container">
-    <h2 class="section-title reveal">A conservative estimate, shown in full.</h2>
-    <p class="section-desc reveal">Median outcomes from mid-size manufacturing deployments (50&ndash;400 machines) in the first 12 months. We'd rather hand you a defensible number than an impressive one.</p>
+    <!-- ========== OUTCOMES ========== -->
+    <section class="section section-muted" id="outcomes" aria-labelledby="outcomes-heading">
+      <div class="container">
+        <p class="section-label">Operational outcomes</p>
+        <h2 id="outcomes-heading" class="section-title">What changes when Deri joins the response.</h2>
+        <p class="section-lead">Deri is designed to help reliability and maintenance teams act earlier, diagnose faster, preserve operational knowledge, and reduce repeated troubleshooting.</p>
 
-    <div class="ledger reveal">
-      <div class="ledger-header">
-        <h3>Single-machine savings estimate</h3>
-        <span class="mono">FIGURE 3.1</span>
+        <div class="outcomes-grid">
+          <article class="outcome reveal">
+            <h3 class="outcome-title">Earlier warning</h3>
+            <p>Surface abnormal equipment behavior and emerging failure patterns before they escalate into larger production issues.</p>
+          </article>
+          <article class="outcome reveal">
+            <h3 class="outcome-title">Faster diagnosis</h3>
+            <p>Automatically assemble the relevant signals, alarms, documents, maintenance history, and previous resolutions around each incident.</p>
+          </article>
+          <article class="outcome reveal">
+            <h3 class="outcome-title">Better recovery and documentation</h3>
+            <p>Give technicians evidence-backed next steps and capture the actions that restored production.</p>
+          </article>
+          <article class="outcome reveal">
+            <h3 class="outcome-title">Less repeated troubleshooting</h3>
+            <p>Make previous repairs searchable and identify recurring failure patterns across equipment and incidents.</p>
+          </article>
+        </div>
       </div>
-      <div class="ledger-row"><span class="k">Avg. unplanned downtime cost, per hour (mid-size line)</span><span class="v">$4,200</span></div>
-      <div class="ledger-row"><span class="k">Downtime hours avoided per critical fault caught early</span><span class="v">&times; 6.5</span></div>
-      <div class="ledger-row"><span class="k">Critical faults caught early, per machine per year</span><span class="v">&times; 3</span></div>
-      <div class="ledger-row total"><span class="k">Estimated annual savings, per machine</span><span class="v">&asymp; $81,900</span></div>
-      <div class="ledger-note">Results vary by equipment and site. We'll build your real number together on the demo call.</div>
-    </div>
+    </section>
 
-    <div class="metric-row reveal">
-      <div class="metric-cell"><div class="metric-num mono">$180K&ndash;$640K</div><div class="metric-label">Annual downtime avoided, per plant</div></div>
-      <div class="metric-cell"><div class="metric-num mono">61%</div><div class="metric-label">Faster root-cause analysis</div></div>
-      <div class="metric-cell"><div class="metric-num mono">2.3&times;</div><div class="metric-label">More PMs completed on time</div></div>
-      <div class="metric-cell"><div class="metric-num mono">~7 mo</div><div class="metric-label">Typical payback period</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="how">
-  <div class="container">
-    <h2 class="section-title reveal">Simple deployment. No plant disruption.</h2>
-
-    <div class="procedure">
-      <div class="procedure-step reveal">
-        <span class="procedure-num mono">01</span>
-        <div class="procedure-content"><h3>Connect to anything: sensors, PLCs, CMMS, and existing systems</h3></div>
+    <!-- ========== PILOT ========== -->
+    <section class="section section-pilot" id="pilot" aria-labelledby="pilot-heading">
+      <div class="container pilot-inner">
+        <div class="pilot-copy">
+          <p class="section-label">Pilot with Novara</p>
+          <h2 id="pilot-heading" class="pilot-title">Bring Deri into one real workflow.</h2>
+          <p class="pilot-line">See Deri in your environment.</p>
+          <p class="pilot-support">Tell us how your team currently handles equipment incidents. We will identify where Deri can fit, what systems are required, and how the deployment can be measured.</p>
+        </div>
+        <a href="#" class="btn btn-accent btn-lg btn-partner">Partner with us</a>
       </div>
-      <div class="procedure-step reveal">
-        <span class="procedure-num mono">02</span>
-        <div class="procedure-content"><h3>Run in the cloud or on-prem &mdash; your infrastructure, your call</h3></div>
-      </div>
-      <div class="procedure-step reveal">
-        <span class="procedure-num mono">03</span>
-        <div class="procedure-content"><h3>Quick setup, live in days, not months</h3></div>
-      </div>
-      <div class="procedure-step reveal">
-        <span class="procedure-num mono">04</span>
-        <div class="procedure-content"><h3>No disturbance, install without stopping the line</h3></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-
-<section class="section demo-section" id="demo">
-  <div class="container">
-    <div class="demo-inner">
-      <div class="demo-copy reveal">
-        <h2 class="section-title">See it running on your equipment</h2>
-        <p class="section-desc">A 30-minute live walkthrough — your fault types, your data structure, your ROI estimate. No slides, no pressure.</p>
-        <ul class="demo-checklist">
-          <li>Live fault-path walkthrough on a real case</li>
-          <li>Sensors + CMMS integration Q&amp;A</li>
-          <li>Your plant's downtime cost modeled on the call</li>
-          <li>On-prem or cloud deployment options covered</li>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="./assets/logo.png" alt="Novara Robotics" width="120" height="32">
+        <p class="footer-tag">Building AI reliability systems for the physical world.</p>
+        <p class="footer-meta">&copy; 2026 Novara Robotics</p>
+        <p class="footer-meta">Austin, Texas</p>
+        <p class="footer-meta"><a href="mailto:contact@novararobotics.com">contact@novararobotics.com</a></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <p class="footer-heading">Site</p>
+        <ul>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#deployment">Deployment</a></li>
+          <li><a href="#outcomes">Outcomes</a></li>
+          <li><a href="#pilot">Pilot</a></li>
+        </ul>
+      </nav>
+      <div class="footer-legal">
+        <p class="footer-heading">Company</p>
+        <ul>
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
         </ul>
       </div>
-      <div class="demo-card reveal">
-        <span class="demo-card-label">Book a session</span>
-        <p class="demo-card-title">30-Minute Product Demo</p>
-        <div class="demo-card-meta">
-          <div class="demo-card-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            30 minutes
-          </div>
-          <div class="demo-card-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            You choose the time
-          </div>
-          <div class="demo-card-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.89L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
-            Video call — link sent on booking
-          </div>
-        </div>
-        <a href="https://calendly.com/saayuj-novararobotics/30min" class="btn btn-primary btn-book-demo" target="_blank" rel="noopener noreferrer">
-          Request a Demo
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <p class="demo-card-note">No commitment. Cancellable anytime.</p>
-      </div>
     </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Novara Robotics</p>
-      <p><a href="mailto:contact@novararobotics.com">contact@novararobotics.com</a></p>
-    </div>
-  </div>
-</footer>
-
-<script>
-(function(){
-  var cfg = window.SITE_CONFIG || {};
-  document.querySelectorAll('.btn-book-demo').forEach(function(el){
-    el.setAttribute('href', cfg.demoBookingUrl || '#');
-    el.setAttribute('target', '_blank');
-    el.setAttribute('rel', 'noopener noreferrer');
-  });
-  document.querySelectorAll('.btn-watch-demo').forEach(function(el){
-    el.setAttribute('href', cfg.productDemoVideoUrl || '#');
-    el.setAttribute('target', '_blank');
-    el.setAttribute('rel', 'noopener noreferrer');
-  });
-})();
-
-(function(){
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){ if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
-})();
-
-(function(){
-  var toggle = document.querySelector('.nav-mobile-toggle');
-  var links = document.querySelector('.nav-links');
-  if (!toggle || !links) return;
-  toggle.addEventListener('click', function(){
-    var isOpen = links.style.display === 'flex';
-    links.style.display = isOpen ? 'none' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '64px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = 'var(--color-bg)';
-    links.style.padding = '1.5rem';
-    links.style.borderBottom = '1px solid var(--color-divider)';
-    links.style.gap = '1.25rem';
-  });
-})();
-</script>
-
+  </footer>
 </body>
 </html>
