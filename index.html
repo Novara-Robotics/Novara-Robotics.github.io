@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deri by Novara Robotics | AI Reliability Engineer for Factories</title>
-  <meta name="description" content="Deri monitors factory equipment, detects emerging issues, investigates failures, guides recovery, and learns from every incident across machines, robots, and production systems.">
+  <meta name="description" content="Deri detects emerging equipment issues, investigates failures, and guides teams from alarm to resolution across machines, robots, and production systems.">
   <meta property="og:title" content="Deri by Novara Robotics | AI Reliability Engineer for Factories">
-  <meta property="og:description" content="Deri monitors factory equipment, detects emerging issues, investigates failures, guides recovery, and learns from every incident across machines, robots, and production systems.">
+  <meta property="og:description" content="Deri detects emerging equipment issues, investigates failures, and guides teams from alarm to resolution across machines, robots, and production systems.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="./assets/logo.png">
-  <link rel="icon" href="./assets/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="./assets/favicon.png">
+  <meta property="og:image" content="./assets/logo_nobg.png">
+  <link rel="icon" href="./assets/n_nobg.png" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/n_nobg.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
   <header class="site-header">
     <div class="container nav">
       <a href="#top" class="nav-brand" aria-label="Novara Robotics home">
-        <img src="./assets/logo.png" alt="Novara Robotics" width="140" height="36">
+        <img src="./assets/logo_nobg.png" alt="Novara Robotics" width="180" height="48">
       </a>
 
       <nav class="nav-primary" aria-label="Primary">
@@ -37,7 +37,7 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="#" class="btn btn-accent btn-partner">Partner with us</a>
+        <a href="#" class="btn btn-accent btn-partner">Book a demo</a>
         <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -49,13 +49,28 @@
 
   <main id="main">
     <!-- ========== HERO ========== -->
+    <!--
+      Hero background candidates (pick one, then set as .hero-bg image or ./assets/deri-hero.png):
+      ./assets/hero-candidates/hero-bg-01-factory-wash.png
+      ./assets/hero-candidates/hero-bg-02-robot-sketch.png
+      ./assets/hero-candidates/hero-bg-02-robot-sketch-darker.png (previous)
+      ./assets/hero-candidates/hero-bg-06-robots-machines.png
+      ./assets/hero-candidates/hero-bg-06b-robots-machines-clean.png (active)
+      ./assets/hero-candidates/hero-bg-03-signal-paths.png
+      ./assets/hero-candidates/hero-bg-04-line-equipment.png
+      ./assets/hero-candidates/hero-bg-05-silhouette.png
+    -->
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-bg" aria-hidden="true"></div>
-      <div class="container hero-inner">
-        <h1 id="hero-title" class="hero-title">DERI</h1>
-        <p class="hero-category">The AI reliability engineer for factories.</p>
-        <p class="hero-tagline">better visibility. faster response. less downtime.</p>
-        <p class="hero-support">Deri monitors equipment, detects emerging issues, investigates failures, guides recovery, and learns from every incident across machines, robots, and production systems.</p>
+      <div class="container hero-content">
+        <div class="hero-inner">
+          <h1 id="hero-title" class="hero-title">DERI</h1>
+          <p class="hero-category">The AI reliability engineer for factories.</p>
+          <div class="hero-meta">
+            <span class="hero-rule" aria-hidden="true"></span>
+            <p class="hero-tagline">Better visibility. Faster response. Less downtime.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -63,52 +78,29 @@
     <section class="section" id="product" aria-labelledby="product-heading">
       <div class="container">
         <p class="section-label">How Deri works</p>
-        <h2 id="product-heading" class="section-title">From early warning to verified resolution.</h2>
-        <p class="section-lead">Deri brings live equipment signals, alarms, manuals, work orders, maintenance history, previous incidents, and technician knowledge into one reliability workflow.</p>
+        <h2 id="product-heading" class="section-title">From early warning to resolution.</h2>
+        <p class="section-lead">Deri detects emerging equipment issues, investigates failures, and guides teams from alarm to resolution across machines, robots, and production systems.</p>
 
         <ol class="loop" role="list">
           <li class="loop-stage reveal">
-            <span class="loop-num" aria-hidden="true">01</span>
+            <span class="loop-num">01</span>
             <h3 class="loop-title">Monitor</h3>
-            <p class="loop-copy">Deri watches machine and process signals, alarms, and operational events to surface anomalies, changing equipment behavior, and emerging failure patterns.</p>
-            <ul class="loop-points">
-              <li>Machine and robot telemetry</li>
-              <li>PLC alarms and events</li>
-              <li>Sensor data and process variables</li>
-              <li>Equipment states and operating patterns</li>
-            </ul>
+            <p class="loop-copy">Detect anomalies, changing equipment behavior, and emerging failure patterns.</p>
           </li>
           <li class="loop-stage reveal">
-            <span class="loop-num" aria-hidden="true">02</span>
+            <span class="loop-num">02</span>
             <h3 class="loop-title">Investigate</h3>
-            <p class="loop-copy">When an issue appears, Deri automatically assembles the relevant evidence from live machine states, recent changes, manuals, SOPs, work orders, maintenance history, and similar past incidents.</p>
-            <ul class="loop-points">
-              <li>Ranks likely causes</li>
-              <li>Shows supporting evidence</li>
-              <li>Does not state root cause as certainty</li>
-            </ul>
+            <p class="loop-copy">Bring together the signals, alarms, documents, and past incidents relevant to the issue.</p>
           </li>
           <li class="loop-stage reveal">
-            <span class="loop-num" aria-hidden="true">03</span>
+            <span class="loop-num">03</span>
             <h3 class="loop-title">Resolve</h3>
-            <p class="loop-copy">Deri recommends the next diagnostic checks, guides technicians through recovery, coordinates escalation, and supports approved operational actions within customer-defined permissions.</p>
-            <ul class="loop-points">
-              <li>Recommended next steps and questions</li>
-              <li>Manuals, procedures, and similar incidents</li>
-              <li>Incident and work-order updates</li>
-              <li>Escalation recommendations</li>
-            </ul>
+            <p class="loop-copy">Rank likely causes, recommend next steps, and guide technicians through recovery.</p>
           </li>
           <li class="loop-stage reveal">
-            <span class="loop-num" aria-hidden="true">04</span>
+            <span class="loop-num">04</span>
             <h3 class="loop-title">Learn</h3>
-            <p class="loop-copy">After the issue is resolved, Deri records the symptoms, actions, causes, and outcomes so the next response begins with more context.</p>
-            <ul class="loop-points">
-              <li>Structured incident history</li>
-              <li>Searchable repair knowledge</li>
-              <li>Better shift handovers</li>
-              <li>Recurring-failure identification</li>
-            </ul>
+            <p class="loop-copy">Capture the resolution so future incidents begin with more context.</p>
           </li>
         </ol>
       </div>
@@ -121,22 +113,20 @@
         <h2 id="action-heading" class="section-title sr-only">How teams use Deri</h2>
 
         <!--
-          PRODUCT SCREENSHOT: Manager / supervisor dashboard
+          PRODUCT SCREENSHOT: Manager dashboard
           Replace the placeholder below with:
           <img src="./assets/manager-dashboard.png" alt="Deri manager dashboard showing equipment health, anomalies, and active reliability incidents." width="1280" height="800" loading="lazy" decoding="async">
         -->
         <div class="action-block reveal">
           <div class="action-copy">
-            <p class="action-view">Manager / supervisor view</p>
+            <p class="action-view">
+              <span class="icon icon-inline" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><rect x="2" y="3" width="20" height="14" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>
+              </span>
+              Manager view
+            </p>
             <h3 class="action-title">Detect problems before they become downtime.</h3>
-            <p class="action-lead">Deri combines live equipment signals with operational history to surface abnormal behavior, recurring patterns, and maintenance needs. Managers and supervisors see what changed, why it matters, and which assets require attention.</p>
-            <ul class="action-points">
-              <li>Equipment and production-system visibility</li>
-              <li>Anomaly and incident prioritization</li>
-              <li>Emerging failure patterns and recurring issues</li>
-              <li>Recommended maintenance attention</li>
-              <li>Cross-asset or cross-line trends</li>
-            </ul>
+            <p class="action-lead">See anomalies, active incidents, and recurring equipment issues in one place, so your team knows what changed and what needs attention.</p>
           </div>
           <div class="action-media">
             <div class="browser-frame" role="img" aria-label="Deri manager dashboard showing equipment health, anomalies, and active reliability incidents.">
@@ -153,7 +143,7 @@
         </div>
 
         <!--
-          PRODUCT SCREENSHOT: Technician / operator mobile app
+          PRODUCT SCREENSHOT: Technician mobile app
           Replace the placeholder below with:
           <img src="./assets/technician-app.png" alt="Deri technician application showing incident context, likely causes, and guided diagnostic actions." width="780" height="1680" loading="lazy" decoding="async">
         -->
@@ -168,17 +158,15 @@
             </div>
           </div>
           <div class="action-copy">
-            <p class="action-view">Technician / operator view</p>
-            <h3 class="action-title">Manage incidents from alarm to resolution.</h3>
-            <p class="action-lead">When equipment fails, Deri builds the incident context, surfaces likely causes and supporting evidence, guides the technician through diagnosis, and records what restored production.</p>
-            <ul class="action-points">
-              <li>Active incident context</li>
-              <li>Ranked likely causes with evidence</li>
-              <li>Relevant manuals, SOPs, and similar repairs</li>
-              <li>Guided diagnostic steps</li>
-              <li>Technician notes, work-order updates, and resolution documentation</li>
-            </ul>
-            <p class="action-note">Deri is not merely a chatbot. It works with operational context, incident evidence, maintenance records, and structured workflows.</p>
+            <p class="action-view">
+              <span class="icon icon-inline" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+              </span>
+              Technician view
+            </p>
+            <h3 class="action-title">Move from alarm to resolution.</h3>
+            <p class="action-lead">Give technicians the incident context, likely causes, relevant procedures, and next steps needed to restore production.</p>
+            <p class="action-note">Every action and resolution becomes part of the equipment’s history.</p>
           </div>
         </div>
       </div>
@@ -189,70 +177,62 @@
       <div class="container">
         <p class="section-label">Deployment</p>
         <h2 id="deployment-heading" class="section-title">Built to fit your factory, not disrupt it.</h2>
-        <p class="section-lead">Start with one workflow or equipment group, connect only the systems required, and expand after value has been demonstrated.</p>
 
         <div class="spec-list">
           <div class="spec-row reveal">
-            <h3 class="spec-title">Start narrow</h3>
+            <h3 class="spec-title">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+              </span>
+              Start narrow
+            </h3>
             <div class="spec-body">
-              <p>Begin with one recurring incident, selected asset group, or reliability workflow instead of attempting a plant-wide rollout on day one.</p>
-              <ul>
-                <li>Focused initial scope and defined operational workflow</li>
-                <li>Selected machines or production systems</li>
-                <li>Agreed success criteria before expansion</li>
-              </ul>
+              <p>Begin with one equipment group, recurring incident, or maintenance workflow.</p>
             </div>
           </div>
           <div class="spec-row reveal">
-            <h3 class="spec-title">Work with existing systems</h3>
+            <h3 class="spec-title">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h3.5V14M17.5 20.5A3.5 3.5 0 0 0 21 17"/></svg>
+              </span>
+              Work with existing systems
+            </h3>
             <div class="spec-body">
-              <p>Deri can operate alongside current workflows or connect with selected factory systems, including PLCs, robots, sensors, historians, MES, CMMS, manuals, SOPs, and maintenance records.</p>
-              <ul>
-                <li>No rip-and-replace requirement</li>
-                <li>Standalone, parallel, or integrated deployment</li>
-                <li>Connect only the systems needed for the initial workflow</li>
-                <li>Existing systems remain systems of record where appropriate</li>
-              </ul>
+              <p>Run alongside current processes or connect to selected PLCs, robots, sensors, historians, MES, CMMS, and maintenance records.</p>
             </div>
           </div>
           <div class="spec-row reveal">
-            <h3 class="spec-title">Deploy your way</h3>
+            <h3 class="spec-title">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+              </span>
+              Deploy your way
+            </h3>
             <div class="spec-body">
-              <p>Run Deri in the cloud, in a hybrid configuration, or on-premises using the Novara OT Box, depending on plant requirements.</p>
-              <ul>
-                <li>Cloud, hybrid, or on-premises architecture</li>
-                <li>Restricted-network or air-gapped environments where technically feasible</li>
-                <li>Customer-selected deployment model</li>
-              </ul>
+              <p>Choose cloud, hybrid, or on-premises deployment based on your plant requirements.</p>
             </div>
           </div>
           <div class="spec-row reveal">
-            <h3 class="spec-title">Stay in control</h3>
+            <h3 class="spec-title">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              </span>
+              Stay in control
+            </h3>
             <div class="spec-body">
-              <p>Deployments can begin in read-only mode. Data access, user permissions, and operational actions remain governed by customer-defined controls and human approvals.</p>
-              <ul>
-                <li>Read-only starting mode</li>
-                <li>Role-based permissions and customer-controlled access</li>
-                <li>Human approval for operational actions</li>
-                <li>Evidence shown behind recommendations</li>
-                <li>Auditability of incident actions and outcomes</li>
-              </ul>
+              <p>Start in read-only mode and keep data access, permissions, and operational actions under customer-defined controls and human approval.</p>
             </div>
           </div>
         </div>
 
         <div class="onboarding reveal">
-          <h3 class="onboarding-title">Novara handles the rollout.</h3>
-          <p class="onboarding-lead">Novara works with your operations, maintenance, controls, and IT or OT teams to configure the workflow, map the relevant data, integrate selected systems, train users, and support the deployment.</p>
-          <ol class="onboarding-steps">
-            <li>Select the workflow and success metrics</li>
-            <li>Identify the required systems and data</li>
-            <li>Configure integrations and operational context</li>
-            <li>Train the relevant users</li>
-            <li>Launch the focused deployment</li>
-            <li>Review results and decide whether to expand</li>
-          </ol>
-          <p class="onboarding-note">Focused deployments are scoped around the selected systems, workflow, and plant requirements. The initial deployment is designed to minimize customer effort and avoid unnecessary operational disruption.</p>
+          <h3 class="onboarding-title">
+            <span class="icon icon-inline" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            We handle the rollout.
+          </h3>
+          <p class="onboarding-lead">We work with your operations, maintenance, controls, and IT/OT teams to configure the workflow, connect the required systems, train users, and support the deployment.</p>
         </div>
       </div>
     </section>
@@ -261,25 +241,37 @@
     <section class="section section-muted" id="outcomes" aria-labelledby="outcomes-heading">
       <div class="container">
         <p class="section-label">Operational outcomes</p>
-        <h2 id="outcomes-heading" class="section-title">What changes when Deri joins the response.</h2>
-        <p class="section-lead">Deri is designed to help reliability and maintenance teams act earlier, diagnose faster, preserve operational knowledge, and reduce repeated troubleshooting.</p>
+        <h2 id="outcomes-heading" class="section-title">What Deri helps improve.</h2>
+        <p class="section-lead">Act earlier, diagnose faster, preserve operational knowledge, and reduce repeated troubleshooting.</p>
 
         <div class="outcomes-grid">
           <article class="outcome reveal">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+            </span>
             <h3 class="outcome-title">Earlier warning</h3>
-            <p>Surface abnormal equipment behavior and emerging failure patterns before they escalate into larger production issues.</p>
+            <p>Surface abnormal behavior before it becomes a larger production issue.</p>
           </article>
           <article class="outcome reveal">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
             <h3 class="outcome-title">Faster diagnosis</h3>
-            <p>Automatically assemble the relevant signals, alarms, documents, maintenance history, and previous resolutions around each incident.</p>
+            <p>Bring the relevant signals, documents, and history into one incident view.</p>
           </article>
           <article class="outcome reveal">
-            <h3 class="outcome-title">Better recovery and documentation</h3>
-            <p>Give technicians evidence-backed next steps and capture the actions that restored production.</p>
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M13 2L4 14h7l-1 8 10-14h-7l0-6z"/></svg>
+            </span>
+            <h3 class="outcome-title">Faster recovery</h3>
+            <p>Give technicians clear, evidence-backed next steps.</p>
           </article>
           <article class="outcome reveal">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>
+            </span>
             <h3 class="outcome-title">Less repeated troubleshooting</h3>
-            <p>Make previous repairs searchable and identify recurring failure patterns across equipment and incidents.</p>
+            <p>Turn every repair into searchable knowledge for the next incident.</p>
           </article>
         </div>
       </div>
@@ -290,11 +282,9 @@
       <div class="container pilot-inner">
         <div class="pilot-copy">
           <p class="section-label">Pilot with Novara</p>
-          <h2 id="pilot-heading" class="pilot-title">Bring Deri into one real workflow.</h2>
-          <p class="pilot-line">See Deri in your environment.</p>
-          <p class="pilot-support">Tell us how your team currently handles equipment incidents. We will identify where Deri can fit, what systems are required, and how the deployment can be measured.</p>
+          <h2 id="pilot-heading" class="pilot-title">Bring Deri into one real workflow, and expand only when it proves value.</h2>
         </div>
-        <a href="#" class="btn btn-accent btn-lg btn-partner">Partner with us</a>
+        <a href="#" class="btn btn-accent btn-lg btn-partner">Book a demo</a>
       </div>
     </section>
   </main>
@@ -302,10 +292,10 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <img src="./assets/logo.png" alt="Novara Robotics" width="120" height="32">
-        <p class="footer-tag">Building AI reliability systems for the physical world.</p>
-        <p class="footer-meta">&copy; 2026 Novara Robotics</p>
-        <p class="footer-meta">Austin, Texas</p>
+        <img src="./assets/logo_nobg.png" alt="Novara Robotics" width="140" height="36">
+        <p class="footer-tag">AI reliability for the physical world.</p>
+        <p class="footer-meta">&copy; 2026 Novara Robotics Inc.</p>
+        <p class="footer-meta">Austin, TX, USA</p>
         <p class="footer-meta"><a href="mailto:contact@novararobotics.com">contact@novararobotics.com</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
@@ -320,9 +310,9 @@
       <div class="footer-legal">
         <p class="footer-heading">Company</p>
         <ul>
-          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
+          <li><a href="https://www.linkedin.com/company/novara-robotics" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+          <li><a href="./terms.html">Terms</a></li>
         </ul>
       </div>
     </div>

@@ -45,6 +45,19 @@
     });
   }
 
+  function initHeaderScroll() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+
+    var threshold = 24;
+    function update() {
+      header.classList.toggle("is-scrolled", window.scrollY > threshold);
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
   function initReveals() {
     var nodes = document.querySelectorAll(".reveal");
     if (!nodes.length) return;
@@ -72,5 +85,6 @@
 
   wirePartnerButtons();
   initMobileNav();
+  initHeaderScroll();
   initReveals();
 })();

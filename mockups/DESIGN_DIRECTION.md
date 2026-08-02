@@ -18,7 +18,7 @@ Status: Implemented on branch `experiment/deri-site` (white + copper). Refine 4-
 | Deployment | **08** (primary); **10** if vertical | Spec-sheet / clean rows |
 | Outcomes | **01** / **08** (similar); maybe **10** 2×2 | No fake metrics |
 | Pilot | Prefer **minimal** over 05/06/10 full treatments | One pilot line + “see Deri in your environment” + single CTA — not a heavy 4-step block |
-| Footer | Standard | Email, location, copyright, LinkedIn (+ privacy/terms placeholders) |
+| Footer | Standard | Email, location, copyright, LinkedIn, Privacy, Terms |
 
 ## Explicit rejects / changes
 - Do **not** lock visual theme to blue + yellow + white only. Explore better light-mode themes.
@@ -57,3 +57,13 @@ Shared structure: 06 hero (no rail, no CTAs) + hero tagline + 10 How Deri Works 
 | `deri-hybrid-08-sand-oxidized.png` | Sand / charcoal / oxidized green |
 | `deri-hybrid-09-snow-violetgray.png` | Snow / graphite / violet-gray |
 | `deri-hybrid-10-aluminum-orange.png` | Aluminum / charcoal / signal orange |
+
+## Applied site updates (2026-08-01 batch)
+
+- Hero locked: `hero-bg-06b-robots-machines-clean.png` + light L→R wash; optical D/T/B offsets
+- CTA label: **Book a demo**
+- How Deri Works: 01–04 numbers only (icons removed); column gutters match Outcomes
+- Product in Action labels: **Manager view** + **Technician view**
+- Deployment: removed redundant section lead; onboarding collapsed to title + one line
+- Pilot: no em dash — “Bring Deri into one real workflow, and expand only when it proves value.”
+- Avoid em dashes in site copy going forward
