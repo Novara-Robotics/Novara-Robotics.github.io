@@ -1030,9 +1030,30 @@ p, li { text-wrap: pretty; }
   .story-cell { gap: var(--space-6); }
   .deploy-flow {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+    gap: var(--space-4);
+    justify-items: center;
   }
-  .deploy-connector { display: none; }
+  /* Vertical flow arrows — stacked layout only; desktop keeps horizontal connectors */
+  .deploy-connector {
+    display: block;
+    width: 2px;
+    height: 1.75rem;
+    margin-inline: auto;
+    background: var(--color-accent);
+    opacity: 0.55;
+    border-radius: 1px;
+  }
+  .deploy-connector::after {
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: -1px;
+    border-top: 8px solid var(--color-accent);
+    border-bottom: none;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    transform: translateX(-50%);
+  }
   .outcome-board { grid-template-columns: 1fr; }
   .board-cell {
     border-right: none;
