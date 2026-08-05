@@ -380,13 +380,11 @@ p, li { text-wrap: pretty; }
   stroke-width: 1.25;
 }
 
-.loop-stage .icon,
-.outcome .icon {
+.loop-stage .icon {
   display: flex;
 }
 
-.loop-stage .icon svg,
-.outcome .icon svg {
+.loop-stage .icon svg {
   width: 16px;
   height: 16px;
 }
@@ -537,7 +535,7 @@ p, li { text-wrap: pretty; }
   font-size: var(--text-base);
   line-height: 1.55;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-5);
+  margin-bottom: 0;
 }
 
 .action-points {
@@ -661,7 +659,7 @@ p, li { text-wrap: pretty; }
 .spec-list {
   border-top: 1px solid var(--color-text);
   margin-top: var(--space-10);
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-8);
 }
 
 .spec-row {
@@ -718,27 +716,13 @@ p, li { text-wrap: pretty; }
   background: var(--color-accent);
 }
 
-.onboarding {
-  padding: var(--space-10);
-  background: var(--color-bg-muted);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-.onboarding-title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--text-xl);
-  margin-bottom: var(--space-4);
-}
-
-.onboarding-lead {
+.deployment-support {
   font-size: var(--text-base);
+  font-weight: 600;
   line-height: 1.55;
-  color: var(--color-text-muted);
-  max-width: 62ch;
-  margin-bottom: 0;
+  color: var(--color-text);
+  max-width: 58ch;
+  margin: 0;
 }
 
 /* ========== Outcomes ========== */
@@ -766,20 +750,47 @@ p, li { text-wrap: pretty; }
   padding-right: 0;
 }
 
-.outcome .icon {
-  display: flex;
-}
-
 .outcome-title {
   font-size: var(--text-base);
   font-weight: 600;
   margin-bottom: var(--space-3);
+  line-height: 1.25;
+}
+
+.outcome-title-text {
+  display: inline;
+}
+
+.outcome-title .outcome-dir {
+  display: inline-flex;
+  vertical-align: -0.35em;
+  margin: 0 0 0 0.35em;
+  color: var(--color-accent);
+}
+
+.outcome-title .outcome-dir svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  stroke: #a55b3c;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .outcome p {
   font-size: var(--text-base);
   line-height: 1.55;
   color: var(--color-text-muted);
+}
+
+.outcomes-note {
+  margin-top: var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--color-text);
+  max-width: 62ch;
 }
 
 /* ========== Pilot ========== */
