@@ -524,18 +524,22 @@ p, li { text-wrap: pretty; }
   justify-content: center;
   background: transparent;
   width: 100%;
+  /* Match dashboard panel ratio so all four media boxes share one height */
+  aspect-ratio: 1138 / 821;
+  overflow: hidden;
 }
 
 .story-media:not(.story-media-phone) {
   border: 1px solid var(--color-border-strong);
   border-radius: 0;
   background: transparent;
-  overflow: hidden;
 }
 
 .story-media img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   display: block;
   background: transparent;
   padding: 0;
@@ -543,40 +547,22 @@ p, li { text-wrap: pretty; }
 }
 
 .story-media-phone {
-  flex: 1;
-  min-height: 12rem;
-  aspect-ratio: auto;
   border: none;
   background: transparent;
 }
 
 .story-media-phone img {
   width: auto;
-  height: auto;
-  max-height: 22rem;
-  max-width: 46%;
+  height: 100%;
+  max-width: 42%;
   object-fit: contain;
-  margin-inline: auto;
 }
 
 .story-copy {
   padding-inline: 0.15rem;
 }
 
-/* Bottom row: center copy and pin to shared baseline */
-.story-cell:nth-child(3),
-.story-cell:nth-child(4) {
-  justify-content: flex-start;
-}
-
-.story-cell:nth-child(3) .story-media,
-.story-cell:nth-child(4) .story-media {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Bottom row: pin captions to one shared baseline */
 .story-cell:nth-child(3) .story-copy,
 .story-cell:nth-child(4) .story-copy {
   margin-top: auto;
@@ -1135,24 +1121,13 @@ p, li { text-wrap: pretty; }
     gap: var(--space-10);
   }
 
-  .story-cell:nth-child(3) .story-media,
-  .story-cell:nth-child(4) .story-media {
-    flex: none;
-  }
-
   .story-cell:nth-child(3) .story-copy,
   .story-cell:nth-child(4) .story-copy {
     margin-top: 0;
   }
 
-  .story-media-phone {
-    flex: none;
-    min-height: 0;
-  }
-
   .story-media-phone img {
-    max-width: 72%;
-    max-height: 28rem;
+    max-width: 56%;
   }
 
   /* ---- Hero ---- */
@@ -1250,7 +1225,7 @@ p, li { text-wrap: pretty; }
   }
 
   .story-media-phone img {
-    max-width: 78%;
+    max-width: 64%;
   }
 
   .deploy-core {
