@@ -601,7 +601,8 @@ p, li { text-wrap: pretty; }
 
 .product-story-zigzag .story-cell {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  /* Equal columns so every media frame shares one width → one height */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-8);
   align-items: center;
   height: auto;
@@ -615,6 +616,11 @@ p, li { text-wrap: pretty; }
   order: 1;
 }
 
+.product-story-zigzag .story-media {
+  width: 100%;
+  aspect-ratio: 1138 / 821;
+}
+
 .product-story-zigzag .story-copy {
   display: flex;
   flex-direction: column;
@@ -623,7 +629,9 @@ p, li { text-wrap: pretty; }
 }
 
 .product-story-zigzag .story-title {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .product-story-zigzag .story-copy p {
