@@ -27,7 +27,7 @@
       header.classList.toggle("nav-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      links.style.display = open ? "flex" : "";
+      links.style.display = "";
     }
 
     toggle.addEventListener("click", function () {
