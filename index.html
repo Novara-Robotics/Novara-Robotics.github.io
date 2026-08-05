@@ -107,67 +107,87 @@
     </section>
 
     <!-- ========== PRODUCT IN ACTION ========== -->
-    <section class="section section-action" id="action" aria-labelledby="action-heading">
+    <!--
+      Temporary product storyboard until polished screenshots ship.
+      Drop these four cropped UI panels into ./assets/:
+        product-detect.png
+        product-diagnose.png
+        product-execute.png
+        product-close.png
+      Crop to the UI mock only: no slide title, logo, arrows, captions, or page numbers.
+    -->
+    <section class="section" id="action" aria-labelledby="action-heading">
       <div class="container">
         <p class="section-label">Product in action</p>
-        <h2 id="action-heading" class="section-title sr-only">How teams use Deri</h2>
+        <h2 id="action-heading" class="section-title">See Deri from signal to resolution.</h2>
+        <p class="section-lead">Deri turns live machine data into actionable incidents, guided work, and a system that gets smarter after every repair.</p>
 
-        <!--
-          PRODUCT SCREENSHOT: Manager dashboard
-          Replace the placeholder below with:
-          <img src="./assets/manager-dashboard.png" alt="Deri manager dashboard showing equipment health, anomalies, and active reliability incidents." width="1280" height="800" loading="lazy" decoding="async">
-        -->
-        <div class="action-block reveal">
-          <div class="action-copy">
-            <p class="action-view">
-              <span class="icon icon-inline" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><rect x="2" y="3" width="20" height="14" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>
-              </span>
-              Manager view
-            </p>
-            <h3 class="action-title">Know what needs attention.</h3>
-            <p class="action-lead">Track equipment health, active incidents, emerging anomalies, and recurring failures in one place, with a live view of what your team is investigating and resolving.</p>
-          </div>
-          <div class="action-media">
-            <div class="browser-frame" role="img" aria-label="Deri manager dashboard showing equipment health, anomalies, and active reliability incidents.">
-              <div class="browser-chrome" aria-hidden="true">
-                <span></span><span></span><span></span>
-                <span class="browser-url">deri · manager dashboard</span>
-              </div>
-              <div class="media-placeholder">
-                <span class="media-placeholder-label">manager-dashboard.png</span>
-                <span class="media-placeholder-hint">Wide dashboard screenshot placeholder</span>
-              </div>
+        <ol class="product-story reveal" role="list">
+          <li class="story-cell">
+            <div class="story-media">
+              <img
+                src="./assets/product-detect.png"
+                alt="Deri detects an emerging equipment anomaly and prioritizes the incident for the shift."
+                width="1138"
+                height="821"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
-          </div>
-        </div>
-
-        <!--
-          PRODUCT SCREENSHOT: Technician mobile app
-          Replace the placeholder below with:
-          <img src="./assets/technician-app.png" alt="Deri technician application showing incident context, likely causes, and guided diagnostic actions." width="780" height="1680" loading="lazy" decoding="async">
-        -->
-        <div class="action-block action-block-reverse reveal">
-          <div class="action-media action-media-phone">
-            <div class="phone-frame" role="img" aria-label="Deri technician application showing incident context, likely causes, and guided diagnostic actions.">
-              <div class="phone-notch" aria-hidden="true"></div>
-              <div class="media-placeholder media-placeholder-phone">
-                <span class="media-placeholder-label">technician-app.png</span>
-                <span class="media-placeholder-hint">Mobile app screenshot placeholder</span>
-              </div>
+            <div class="story-copy">
+              <h3 class="story-title"><span class="story-num">01</span> Detect &amp; prioritize</h3>
+              <p>Surface the issue and route it to the right person.</p>
             </div>
-          </div>
-          <div class="action-copy">
-            <p class="action-view">
-              <span class="icon icon-inline" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
-              </span>
-              Technician view
-            </p>
-            <h3 class="action-title">Get to the fix faster.</h3>
-            <p class="action-lead">See the incident context, likely causes, relevant procedures, and recommended next steps in one place, then capture what restored production.</p>
-          </div>
-        </div>
+          </li>
+          <li class="story-cell">
+            <div class="story-media">
+              <img
+                src="./assets/product-diagnose.png"
+                alt="Deri assembles incident context and recommends a likely cause and next action."
+                width="1138"
+                height="821"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="story-copy">
+              <h3 class="story-title"><span class="story-num">02</span> Diagnose</h3>
+              <p>Bring together the likely cause, supporting evidence, and context.</p>
+            </div>
+          </li>
+          <li class="story-cell">
+            <div class="story-media story-media-phone">
+              <img
+                src="./assets/product-execute.png"
+                alt="Deri guides a technician on the floor with steps, chat, and photo capture."
+                width="482"
+                height="825"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="story-copy">
+              <h3 class="story-title"><span class="story-num">03</span> Guide on the floor</h3>
+              <p>Guide technicians through the next steps needed to restore production.</p>
+            </div>
+          </li>
+          <li class="story-cell">
+            <div class="story-media">
+              <img
+                src="./assets/product-close.png"
+                alt="Deri auto-generates a closeout report and updates the knowledge base."
+                width="1138"
+                height="821"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <div class="story-copy">
+              <h3 class="story-title"><span class="story-num">04</span> Close &amp; learn</h3>
+              <p>Capture the resolution and add it to the equipment's history.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
