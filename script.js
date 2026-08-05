@@ -129,12 +129,22 @@
     return null;
   }
 
-  function scrollToHash(behavior) {
-    var id = (location.hash || "").replace(/^#/, "");
-    if (!id) return;
+  function headerScrollOffset() {
+    var padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+    if (!isNaN(padding) && padding > 0) return padding;
+    var header = document.querySelector(".site-header");
+    return header ? header.offsetHeight + 16 : 88;
+  }
+
+  function scrollToId(id) {
+    if (!id || id === "top") {
+      window.scrollTo(0, 0);
+      return;
+    }
     var el = document.getElementById(id);
     if (!el) return;
-    el.scrollIntoView({ behavior: behavior || "auto", block: "start" });
+    var top = el.getBoundingClientRect().top + window.scrollY - headerScrollOffset();
+    window.scrollTo(0, Math.max(0, top));
   }
 
   function initLocationMemory() {
@@ -155,7 +165,12 @@
 
     if (!isHomePage(file)) return;
 
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
     var saved = getSavedPath();
+    var restoreTarget = null;
 
     if (!location.hash) {
       if (saved === "privacy.html" || saved === "terms.html") {
@@ -163,21 +178,41 @@
         return;
       }
       if (saved && saved.charAt(0) === "#" && saved !== "#top") {
-        history.replaceState(null, "", saved);
+        restoreTarget = saved;
       }
+    } else if (location.hash !== "#top") {
+      restoreTarget = location.hash;
     }
 
-    if (location.hash && location.hash !== "#top") {
-      setSavedPath(location.hash);
-      scrollToHash("auto");
+    var trackingEnabled = !restoreTarget;
+
+    if (restoreTarget) {
+      history.replaceState(null, "", restoreTarget);
+      setSavedPath(restoreTarget);
+
+      function applyRestore() {
+        scrollToId(restoreTarget.replace(/^#/, ""));
+      }
+
+      applyRestore();
+      requestAnimationFrame(applyRestore);
       window.addEventListener("load", function () {
-        scrollToHash("auto");
+        applyRestore();
+        window.setTimeout(function () {
+          applyRestore();
+          trackingEnabled = true;
+        }, 50);
       });
-    } else if (!saved || saved === "#top") {
+
+      if (document.readyState === "complete") {
+        window.setTimeout(function () {
+          applyRestore();
+          trackingEnabled = true;
+        }, 50);
+      }
+    } else {
       setSavedPath("#top");
     }
-
-    if (!("IntersectionObserver" in window)) return;
 
     var sections = SECTION_IDS.map(function (id) {
       return document.getElementById(id);
@@ -185,26 +220,44 @@
 
     if (!sections.length) return;
 
-    var spy = new IntersectionObserver(function (entries) {
-      var visible = entries
-        .filter(function (entry) { return entry.isIntersecting; })
-        .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; })[0];
-      if (!visible) return;
+    function activeSectionId() {
+      var marker = window.scrollY + headerScrollOffset() + 1;
+      var current = sections[0].id;
+      var i;
 
-      var id = visible.target.id;
-      var hash = "#" + id;
+      for (i = 0; i < sections.length; i++) {
+        var top = sections[i].getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) current = sections[i].id;
+        else break;
+      }
+
+      var doc = document.documentElement;
+      var maxScroll = doc.scrollHeight - window.innerHeight;
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
+        current = sections[sections.length - 1].id;
+      }
+
+      return current;
+    }
+
+    function syncFromScroll() {
+      if (!trackingEnabled) return;
+      var hash = "#" + activeSectionId();
       setSavedPath(hash);
       if (location.hash !== hash) {
         history.replaceState(null, "", hash);
       }
-    }, {
-      rootMargin: "-40% 0px -45% 0px",
-      threshold: [0, 0.25, 0.5, 0.75]
-    });
+    }
 
-    sections.forEach(function (section) {
-      spy.observe(section);
-    });
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (!trackingEnabled || ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        syncFromScroll();
+      });
+    }, { passive: true });
   }
 
   wirePartnerButtons();
