@@ -500,32 +500,38 @@ p, li { text-wrap: pretty; }
   background: var(--color-accent);
 }
 
-/* ========== Product in action — incident storyboard ========== */
+/* ========== How Deri works — zigzag storyboard ========== */
 .product-story {
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6) var(--space-6);
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
   margin: 0;
-  align-items: stretch;
 }
 
 .story-cell {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  display: grid;
+  /* Equal columns so every media frame shares one width → one height */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
   min-width: 0;
-  height: 100%;
+}
+
+.story-row-reverse .story-media {
+  order: 2;
+}
+
+.story-row-reverse .story-copy {
+  order: 1;
 }
 
 .story-media {
   position: relative;
   width: 100%;
-  /* Lock every panel to the dashboard ratio; images cannot stretch the box */
   aspect-ratio: 1138 / 821;
   overflow: hidden;
   background: transparent;
-  flex: 0 0 auto;
 }
 
 .story-media:not(.story-media-phone) {
@@ -551,7 +557,6 @@ p, li { text-wrap: pretty; }
 }
 
 .story-media-phone img {
-  /* Fill the shared frame height; width follows phone aspect */
   width: auto;
   height: 100%;
   max-width: none;
@@ -565,14 +570,17 @@ p, li { text-wrap: pretty; }
 }
 
 .story-copy {
-  padding-inline: 0.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: var(--space-2);
 }
 
 .story-title {
   font-size: var(--text-lg);
   font-weight: 600;
   margin: 0 0 var(--space-2);
-  line-height: 1.25;
+  line-height: 1.2;
   display: flex;
   align-items: baseline;
   gap: var(--space-3);
@@ -587,55 +595,10 @@ p, li { text-wrap: pretty; }
 }
 
 .story-copy p {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: 1.5;
   color: var(--color-text-muted);
   margin: 0;
-}
-
-/* Zigzag compare variant — full-width alternating rows */
-.product-story-zigzag {
-  grid-template-columns: 1fr;
-  gap: var(--space-10);
-}
-
-.product-story-zigzag .story-cell {
-  display: grid;
-  /* Equal columns so every media frame shares one width → one height */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-8);
-  align-items: center;
-  height: auto;
-}
-
-.product-story-zigzag .story-row-reverse .story-media {
-  order: 2;
-}
-
-.product-story-zigzag .story-row-reverse .story-copy {
-  order: 1;
-}
-
-.product-story-zigzag .story-media {
-  width: 100%;
-  aspect-ratio: 1138 / 821;
-}
-
-.product-story-zigzag .story-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-inline: var(--space-2);
-}
-
-.product-story-zigzag .story-title {
-  font-size: var(--text-lg);
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.product-story-zigzag .story-copy p {
-  font-size: var(--text-base);
   max-width: 28rem;
 }
 
@@ -1063,11 +1026,8 @@ p, li { text-wrap: pretty; }
   .loop-stage:nth-child(2) { border-right: none; }
   .loop-stage:nth-child(1),
   .loop-stage:nth-child(2) { border-bottom: 1px solid var(--color-border); }
-  .product-story { gap: var(--space-5); }
-  .product-story-zigzag { gap: var(--space-8); }
-  .product-story-zigzag .story-cell {
-    gap: var(--space-6);
-  }
+  .product-story { gap: var(--space-8); }
+  .story-cell { gap: var(--space-6); }
   .deploy-flow {
     grid-template-columns: 1fr;
     gap: var(--space-6);
@@ -1166,25 +1126,24 @@ p, li { text-wrap: pretty; }
   .loop-stage:last-child { border-bottom: none; }
 
   .product-story {
-    grid-template-columns: 1fr;
     gap: var(--space-10);
   }
 
-  .product-story-zigzag .story-cell {
+  .story-cell {
     grid-template-columns: 1fr;
     gap: var(--space-4);
   }
 
-  .product-story-zigzag .story-row-reverse .story-media,
-  .product-story-zigzag .story-row-reverse .story-copy {
+  .story-row-reverse .story-media,
+  .story-row-reverse .story-copy {
     order: initial;
   }
 
-  .product-story-zigzag .story-media {
+  .story-media {
     order: 1;
   }
 
-  .product-story-zigzag .story-copy {
+  .story-copy {
     order: 2;
     padding-inline: 0.15rem;
   }
