@@ -551,14 +551,17 @@ p, li { text-wrap: pretty; }
 }
 
 .story-media-phone img {
+  /* Fill the shared frame height; width follows phone aspect */
   width: auto;
-  max-width: 42%;
-  height: 92%;
+  height: 100%;
+  max-width: none;
+  max-height: 100%;
   margin: auto;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  object-fit: contain;
 }
 
 .story-copy {
@@ -566,7 +569,7 @@ p, li { text-wrap: pretty; }
 }
 
 .story-title {
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 600;
   margin: 0 0 var(--space-2);
   line-height: 1.25;
@@ -1118,7 +1121,8 @@ p, li { text-wrap: pretty; }
   }
 
   .story-media-phone img {
-    max-width: 56%;
+    height: 100%;
+    max-width: none;
   }
 
   /* ---- Hero ---- */
@@ -1215,8 +1219,8 @@ p, li { text-wrap: pretty; }
     font-size: 0.72rem;
   }
 
-  .story-media-phone img {
-    max-width: 62%;
+  .story-title {
+    font-size: var(--text-lg);
   }
 
   .deploy-core {
