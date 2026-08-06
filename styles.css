@@ -1192,17 +1192,17 @@ p, li { text-wrap: pretty; }
   .hero-title {
     font-size: clamp(3.75rem, 18vw, 5.5rem);
     margin-bottom: var(--space-4);
-    margin-left: 0; /* undo desktop optical D/T/B alignment */
+    margin-left: -0.025em; /* half of desktop optical offset */
   }
 
   .hero-category {
     font-size: clamp(1.2rem, 4.2vw, 1.45rem);
     margin-bottom: var(--space-4);
-    margin-left: 0;
+    margin-left: 0.06rem; /* half of desktop T offset */
   }
 
   .hero-meta {
-    margin-left: 0;
+    margin-left: 0.18rem; /* half of desktop B offset */
   }
 
   .hero-tagline {
@@ -1215,12 +1215,12 @@ p, li { text-wrap: pretty; }
   }
 
   .section-title {
-    font-size: clamp(1.65rem, 6vw, 2.1rem);
+    font-size: clamp(2rem, 7.2vw, 2.55rem);
     max-width: none;
   }
 
   .section-lead {
-    font-size: var(--text-sm);
+    font-size: clamp(1.2rem, 3.6vw, 1.35rem);
     max-width: none;
   }
 
@@ -1248,7 +1248,7 @@ p, li { text-wrap: pretty; }
 
   .pilot-title {
     max-width: none;
-    font-size: clamp(1.65rem, 6vw, 2.1rem);
+    font-size: clamp(2rem, 7.2vw, 2.55rem);
   }
 
   .section-pilot .btn,
