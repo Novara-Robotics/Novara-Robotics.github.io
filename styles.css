@@ -291,10 +291,7 @@ p, li { text-wrap: pretty; }
 }
 
 .hero-title,
-.hero-category,
-.hero-meta,
-.hero-tagline,
-.hero-rule {
+.hero-category {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -314,47 +311,19 @@ p, li { text-wrap: pretty; }
   color: var(--color-hero-ink);
   margin-top: 0;
   margin-bottom: var(--space-5);
-  margin-left: -0.05em; /* pull D left; T/B offsets unchanged */
+  margin-left: -0.05em; /* pull D left; T offset on category */
   padding: 0;
 }
 
 .hero-category {
   font-size: clamp(1.45rem, 1.15rem + 1.15vw, 1.95rem);
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-accent);
   margin-top: 0;
-  margin-bottom: var(--space-6);
+  margin-bottom: 0;
   margin-left: 0.12rem; /* T: one tiny step right */
   padding: 0;
   max-width: none;
-}
-
-.hero-meta {
-  margin: 0 0 0 0.36rem; /* B: three tiny steps right */
-  padding: 0;
-}
-
-.hero-rule {
-  width: 2.75rem;
-  max-width: 2.75rem;
-  height: 1px;
-  margin-top: 0;
-  margin-bottom: var(--space-3);
-  margin-left: 0;
-  padding: 0;
-  background: color-mix(in srgb, var(--color-accent) 55%, transparent);
-  border: 0;
-}
-
-.hero-tagline {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: 500;
-  color: var(--color-accent);
-  letter-spacing: 0.01em;
-  margin: 0;
-  padding: 0;
-  border: 0;
 }
 
 /* ========== Icons — thin copper marks, not decorative weight ========== */
@@ -1197,16 +1166,7 @@ p, li { text-wrap: pretty; }
 
   .hero-category {
     font-size: clamp(1.2rem, 4.2vw, 1.45rem);
-    margin-bottom: var(--space-4);
     margin-left: 0.06rem; /* half of desktop T offset */
-  }
-
-  .hero-meta {
-    margin-left: 0.18rem; /* half of desktop B offset */
-  }
-
-  .hero-tagline {
-    font-size: var(--text-sm);
   }
 
   /* ---- Type / section spacing ---- */
