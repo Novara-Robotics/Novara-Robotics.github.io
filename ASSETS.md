@@ -1,7 +1,8 @@
 # Required assets
 
 ## In use
-- `./assets/logo_nobg.png` — Novara Robotics company logo, transparent (nav + footer, `og:image`, schema logo)
+- `./assets/logo_nobg.png` — Novara Robotics company logo, transparent (nav + footer, schema logo)
+- `./assets/og-card.png` — Link-preview card, 1200×630, **opaque white** (`og:image`); wordmark composited from `logo_nobg.png`
 - `./assets/n_nobg.png` — Source N mark, transparent (not linked directly; icons below are generated from it)
 - `./assets/favicon-96.png` — Primary favicon, 96×96 square, transparent
 - `./favicon.ico` — Root fallback that browsers and Googlebot auto-request; 16/32/48 square, transparent
