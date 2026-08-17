@@ -1,8 +1,12 @@
 # Required assets
 
 ## In use
-- `./assets/logo_nobg.png` — Novara Robotics company logo, transparent (nav + footer)
-- `./assets/n_nobg.png` — Favicon / apple-touch icon (transparent N mark)
+- `./assets/logo_nobg.png` — Novara Robotics company logo, transparent (nav + footer, `og:image`, schema logo)
+- `./assets/n_nobg.png` — Source N mark, transparent (not linked directly; icons below are generated from it)
+- `./assets/favicon-96.png` — Primary favicon, 96×96 square, transparent
+- `./favicon.ico` — Root fallback that browsers and Googlebot auto-request; 16/32/48 square, transparent
+- `./favicon.png` — Root 32×32 square, transparent
+- `./assets/apple-touch-icon.png` — 180×180, **opaque white** (iOS flattens alpha to black)
 - `./assets/logo.png` — Legacy logo (unused)
 
 ## Placeholders (replace when ready)
