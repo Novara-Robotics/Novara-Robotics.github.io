@@ -926,8 +926,14 @@ p, li { text-wrap: pretty; }
   border-bottom-color: var(--color-border);
 }
 
-.doc-section {
+/* Needs two classes to outrank the `.section { padding-block }` override in
+   the max-width: 768px block, which lands later in the file and would
+   otherwise drop this header offset and slide the label under the header. */
+.page-doc .doc-section {
   padding-top: calc(var(--header-h) + var(--space-12));
+}
+
+.doc-section {
   border-bottom: none;
 }
 
