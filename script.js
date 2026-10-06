@@ -107,6 +107,12 @@
         if (section.getBoundingClientRect().top + window.scrollY <= marker) current = section;
       });
 
+      // Same rule as the URL hash: at the very bottom, the last section wins.
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll > 0 && window.scrollY >= maxScroll - 2) {
+        current = sections[sections.length - 1];
+      }
+
       targets.forEach(function (item) {
         if (item.section === current) item.link.setAttribute("aria-current", "true");
         else item.link.removeAttribute("aria-current");
