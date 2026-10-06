@@ -85,6 +85,48 @@
     nodes.forEach(function (el) { observer.observe(el); });
   }
 
+  function initNavSpy() {
+    var links = document.querySelectorAll('.nav-links a[href^="#"]');
+    if (!links.length) return;
+
+    var targets = [];
+    links.forEach(function (link) {
+      var section = document.getElementById(link.getAttribute("href").slice(1));
+      if (section) targets.push({ link: link, section: section });
+    });
+    if (!targets.length) return;
+
+    var sections = SECTION_IDS.map(function (id) {
+      return document.getElementById(id);
+    }).filter(Boolean);
+
+    function update() {
+      var marker = window.scrollY + headerScrollOffset() + 1;
+      var current = null;
+      sections.forEach(function (section) {
+        if (section.getBoundingClientRect().top + window.scrollY <= marker) current = section;
+      });
+
+      targets.forEach(function (item) {
+        if (item.section === current) item.link.setAttribute("aria-current", "true");
+        else item.link.removeAttribute("aria-current");
+      });
+    }
+
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        update();
+      });
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    window.addEventListener("load", update);
+    update();
+  }
+
   function pageFile() {
     var parts = location.pathname.split("/").filter(Boolean);
     var last = parts[parts.length - 1] || "index.html";
@@ -264,5 +306,6 @@
   initMobileNav();
   initHeaderScroll();
   initReveals();
+  initNavSpy();
   initLocationMemory();
 })();
