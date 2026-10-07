@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /restricted_demo/
 
 Sitemap: https://novararobotics.com/sitemap.xml
