@@ -7,7 +7,7 @@
   --color-surface: #ffffff;
   --color-text: #141414;
   --color-text-muted: #5c5c5c;
-  --color-text-faint: #8a8a8a;
+  --color-text-faint: #6e6e6e;
   --color-border: #e6e4e1;
   --color-border-strong: #d0cdc8;
   --color-accent: #a55b3c;
@@ -284,7 +284,7 @@ p, li { text-wrap: pretty; }
       rgba(255, 255, 255, 0.55) 72%,
       rgba(255, 255, 255, 0.4) 100%
     ),
-    url("./assets/hero-candidates/hero-bg-06b-robots-machines-clean.png"),
+    url("./assets/hero-candidates/hero-bg-06b-robots-machines-clean.webp"),
     linear-gradient(160deg, #faf9f7 0%, #f5f3f0 100%);
   background-size: auto, cover, auto;
   background-position: center, center bottom, center;
@@ -1255,8 +1255,25 @@ p, li { text-wrap: pretty; }
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8) var(--space-6);
+  }
+
+  .footer-brand { grid-column: 1 / -1; }
+
+  .footer-meta a {
+    display: inline-block;
+    padding-block: 10px;
+  }
+
+  .footer-nav ul,
+  .footer-legal ul { gap: 0; }
+
+  .footer-nav a,
+  .footer-legal a {
+    display: inline-block;
+    padding-block: 12px;
+    min-height: 44px;
   }
 }
 
