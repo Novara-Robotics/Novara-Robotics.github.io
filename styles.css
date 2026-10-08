@@ -972,6 +972,9 @@ p, li { text-wrap: pretty; }
 
 .doc {
   max-width: 720px;
+  /* centre the narrower column inside the same notch-safe edges the container uses */
+  margin-left: max(var(--edge-l), calc((100% - 720px) / 2));
+  margin-right: max(var(--edge-r), calc((100% - 720px) / 2));
 }
 
 .doc-title {
