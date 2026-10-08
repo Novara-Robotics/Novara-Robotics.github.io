@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/styles.css">
   <script src="/config.js" defer></script>
   <script src="/script.js" defer></script>
-<style>body { min-height: 100vh; display: flex; flex-direction: column; } main.notfound { flex: 1; } main.notfound .doc p:not(.doc-updated) { margin-bottom: var(--space-5); }</style>
+<style>body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; } body.page-doc main.notfound.doc-section { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: var(--header-h) 0 0; border-bottom: 0; min-height: max(320px, 62dvh); } main.notfound .doc { margin-inline: auto; } main.notfound .doc-title { margin-bottom: var(--space-4); } main.notfound .doc p { margin-bottom: var(--space-4); }</style>
 </head>
 <body class="page-doc">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -49,10 +49,9 @@
 
   <main id="main" class="section doc-section notfound">
 <div class="container doc">
-<p class="doc-updated">404</p>
 <h1 class="doc-title">Page not found.</h1>
-<p>The page you were looking for doesn't exist. Head back to Deri by Novara Robotics.</p>
-<p><a href="/">Back to the home page</a></p>
+<p>The page you were looking for doesn't exist.</p>
+<p><a href="/">Back to novararobotics.com</a></p>
 </div>
 </main>
 
