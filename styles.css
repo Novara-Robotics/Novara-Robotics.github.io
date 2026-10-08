@@ -295,7 +295,7 @@ p, li { text-wrap: pretty; }
       rgba(255, 255, 255, 0.55) 72%,
       rgba(255, 255, 255, 0.4) 100%
     ),
-    url("./assets/hero-candidates/hero-bg-06b-robots-machines-clean.webp"),
+    url("./assets/hero-bg.webp"),
     linear-gradient(160deg, #faf9f7 0%, #f5f3f0 100%);
   background-size: auto, cover, auto;
   background-position: center, center bottom, center;
