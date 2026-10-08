@@ -36,3 +36,7 @@ Accepted on purpose; everything else was tested and works.
 - **Reveal on scroll needs JavaScript.** Without it, a fallback shows the sections directly.
 - **Tested on:** Chrome (Ubuntu, Mac, iPhone), Firefox (Ubuntu), Safari (Mac, iPhone, iPad). Not tested: Android, Edge,
   older iOS versions. Safari cannot be run in the dev environment, so Safari behaviour has only been checked by hand.
+- **No analytics (parked on purpose).** There is no visit counting yet. Decision: free only and low priority. Options
+  if it is picked up: Cloudflare Web Analytics (free, cookie-less, basic counts, probably no booking-click goal) or
+  self-hosted Umami (free, more work). Paid tools such as Plausible or Fathom were ruled out for now. Adding any of them
+  also needs one line in the Privacy Policy and one script tag in each page's head.
