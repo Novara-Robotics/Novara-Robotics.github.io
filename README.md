@@ -14,6 +14,8 @@ The Novara Robotics website at novararobotics.com, the home of Deri. Static, hos
   app icons, share image (`og-card.png`), the hero background (`hero-bg.webp`) and the four product images
 - `site.webmanifest`, `favicon.ico`, `robots.txt`, `sitemap.xml`, `CNAME` - metadata. `CNAME` is the custom domain for
   GitHub Pages; keep it.
+- `_config.yml` - the list of files that stay in the repo but are not published on the website (this README, `docs/`,
+  source artwork). Add any new developer-only file or folder to it, or it will be reachable at its address.
 - `docs/DESIGN.md` - colours, type, shape and the design decisions that still hold. Use it when building product UI so
   it matches the site.
 
